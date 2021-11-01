@@ -1,7 +1,7 @@
 // Auth Reference
 import { auth } from "../FirebaseConfig";
 // Auth Functions
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "@firebase/auth";
 
 // create user
 export function createUser(name, email, password){
@@ -10,11 +10,13 @@ export function createUser(name, email, password){
             const user = userCredential.user
             user.displayName(name)
             // ADD USER IN DATABASE
-    }).catch(erro => {
-        console.log(erro.mensage)
-        console.log(erro.code)
-    })
+        }).catch(erro => {
+            console.log(erro.mensage)
+            console.log(erro.code)
+        })
 }
+
+// login user
 export function singInUser(email, password){
     signInWithEmailAndPassword(auth, email, password)
         .then(snapshot =>{
@@ -23,4 +25,15 @@ export function singInUser(email, password){
             console.log(erro.mensage)
             console.log(erro.code)            
         })
+}
+
+// verify if user is log
+export function verifyUserIsLog(setIsLog){
+    onAuthStateChanged(auth, user =>{
+        if(user){
+            setIsLog(true)            
+        }else{
+            setIsLog(false)
+        }
+    })
 }
