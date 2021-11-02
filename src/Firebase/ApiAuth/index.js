@@ -1,7 +1,7 @@
 // Auth Reference
 import { auth } from "../FirebaseConfig";
 // Auth Functions
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "@firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged  } from "@firebase/auth";
 
 // create user
 export function createUser(name, email, password){
@@ -27,13 +27,24 @@ export function singInUser(email, password){
         })
 }
 
-// verify if user is log
-export function verifyUserIsLog(setIsLog){
+// verify Listener if user is log
+export function verifyListenerUserIsLog(isLog, setIsLog){
     onAuthStateChanged(auth, user =>{
         if(user){
-            setIsLog(true)            
+            setIsLog("true")
+            console.log(isLog)            
         }else{
-            setIsLog(false)
+            setIsLog("false")
+            console.log(isLog)            
         }
     })
+}
+
+// verify if user is log
+export function verifyUserIsLog(){
+    if(auth.currentUser != null){
+        return "true"
+    } else{
+        return "false"
+    }
 }
