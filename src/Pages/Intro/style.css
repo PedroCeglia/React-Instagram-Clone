@@ -3,4 +3,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: linear-gradient( to right, #833ab4, #fda830);
+    height: 100vh;
+    /*-o-linear-gradient(to bottom, #EECDA3, #EF629F),
+    -moz-linear-gradient(to bottom, #EECDA3, #EF629F),
+    -webkit-linear-gradient(to bottom, #EECDA3, #EF629F);*/
 }
