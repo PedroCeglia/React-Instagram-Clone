@@ -3,9 +3,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient( to right, #833ab4, #fda830);
+    
+    background-color: rgba(146, 150, 150, 0.356);
+
     height: 100vh;
-    /*-o-linear-gradient(to bottom, #EECDA3, #EF629F),
-    -moz-linear-gradient(to bottom, #EECDA3, #EF629F),
-    -webkit-linear-gradient(to bottom, #EECDA3, #EF629F);*/
+}
+.container-intro img{
+    width: 50px;
 }
