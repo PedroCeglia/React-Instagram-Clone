@@ -1,10 +1,23 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { useHistory } from 'react-router'
 import './style.css'
 
-// import ApiAuth
-import { logOutUser } from '../../Firebase/ApiAuth'
+// Import AuthApi
+import { VerifyListenerUserIsLog, logOutUser } from '../../Firebase/ApiAuth'
 
 export default function Home(){
+
+    // Listener IsLog
+    const isLog = VerifyListenerUserIsLog()
+
+    // Change To Intro Page
+    const history = useHistory()
+    useEffect(()=>{
+        if(isLog === "false"){
+            history.push('/')
+        }
+    },[isLog])
+
     return(
         <div className='container-home'>
             <h2>Home</h2>
