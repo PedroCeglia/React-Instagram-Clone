@@ -3,4 +3,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    height: 100vh;
+
+    background-color: cornsilk;
+    
 }
+.container-inputs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    width: 300px;
+    height: 380px;
+
+    overflow: hidden;
+}
+
