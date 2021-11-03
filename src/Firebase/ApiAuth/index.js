@@ -3,15 +3,19 @@ import { useState, useEffect } from "react";
 // Auth Reference
 import { auth } from "../FirebaseConfig";
 // Auth Functions
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut  } from "@firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile} from "@firebase/auth";
+//import ApiDatabase
+import { createUserInDatabase, setUserNameDatabase } from "../ApiDatabase";
 
-// create user
+// create user 
 export function createUser(name, email, password){
     createUserWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
             const user = userCredential.user
-            user.displayName(name)
+            // Set User Name
+            setName(name, user.uid)
             // ADD USER IN DATABASE
+            createUserInDatabase(email, user.uid)
         }).catch(erro => {
             if(erro){
                 const errorCode = erro.code;
@@ -33,6 +37,18 @@ export function createUser(name, email, password){
             }
         })
 } 
+
+// set User Name
+export function setName(name, id){
+    updateProfile(auth.currentUser,{
+        displayName:name
+    }).then(()=>{
+        // set Name In Database
+        setUserNameDatabase(name, id)
+    }).catch(erro => {
+        console.log(erro.code)
+    })
+}
 
 // login user
 export function singInUser(email, password){
