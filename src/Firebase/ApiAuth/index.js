@@ -1,7 +1,7 @@
 // Auth Reference
 import { auth } from "../FirebaseConfig";
 // Auth Functions
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged  } from "@firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut  } from "@firebase/auth";
 
 // create user
 export function createUser(name, email, password){
@@ -78,5 +78,21 @@ export function verifyUserIsLog(){
         return "true"
     } else{
         return "false"
+    }
+}
+
+// LogOut User
+export function logOutUser(){
+    signOut(auth)
+}
+
+// return User Log
+export function getUserLog(){
+    if(auth.currentUser !== null){
+        return {
+            nome:auth.currentUser.displayName,
+            id:auth.currentUser.uid,
+            email:auth.currentUser.email
+        }
     }
 }
