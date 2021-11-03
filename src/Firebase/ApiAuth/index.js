@@ -30,7 +30,7 @@ export function createUser(name, email, password){
                 console.log(errorCode)               
             }
         })
-}
+} 
 
 // login user
 export function singInUser(email, password){
