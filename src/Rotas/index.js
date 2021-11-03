@@ -1,11 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 // import react-router-dom
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
-// Import Auth
-import {auth} from "../Firebase/FirebaseConfig"
-// import verifyAuth
-import {onAuthStateChanged } from "@firebase/auth";
-
+// import Api Auth
 import {verifyUserIsLog} from "../Firebase/ApiAuth"
 // import Pages
 import Home from "../Pages/Home";
@@ -19,7 +15,7 @@ function PrivateRoute({component: Component, log, pathRedirect, ...rest}){
         <Route
             {...rest}
             render={props =>
-                (verifyUserIsLog() == log)?(
+                (verifyUserIsLog() === log)?(
                     <Component {...props}/>
                     ):(
                     <Redirect to={{pathname: pathRedirect, state:{from: props.location}}}/>
