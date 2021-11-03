@@ -1,5 +1,5 @@
 /* Container Main*/
-.container-login{
+.inputs-enter{
     position: absolute;
     left: 0;
 
@@ -17,19 +17,19 @@
     border-radius: 20px;
     padding: 20px;
 }
-.container-login .default{
+.inputs-enter .default{
     left: -100%;
 }
 
 /* 1st Container */
-.container-login .logo-name{
+.inputs-enter .logo-name{
     max-width: 260px;
     width: 100%;
     min-width: 180px;
     height: 70px;
     margin: 20px;
 }
-.container-login input{
+.inputs-enter input{
     max-width: 320px;
     width: 100%;
     min-width: 180px;
@@ -38,7 +38,7 @@
     border-radius: 20px;
     border: 1px solid rgba(0,0,0,0.5);
 }
-.container-login .btn-logar{
+.inputs-enter .btn-enter{
     background-color: rgba(0, 158, 160, 0.514);
     width: 100%;
     padding: 10px 5px;
@@ -49,11 +49,11 @@
     border-radius: 20px;
 
 }
-.container-login .btn-logar:hover{
+.inputs-enter .btn-enter:hover{
     background-color: rgb(3, 117, 121);
 }
 /* Container Ou*/
-.container-login .container-ou{
+.inputs-enter .container-ou{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,24 +61,24 @@
     width: 100%;
     margin: 20px 0;
 }
-.container-login .container-ou .border-line{
+.inputs-enter .container-ou .border-line{
     width: 100%;
     border: 2px solid rgba(0,0,0,0.4);
     border-radius: 20px;
 }
-.container-login .container-ou .ou{
+.inputs-enter .container-ou .ou{
     margin: 0 20px;
     font-size: 1.2em;
     color: rgba(0,0,0,0.7);
 }
 
 /* Container Go to SingIn */
-.container-login .go-to-singin button{
+.inputs-enter .go-to-other-page button{
     background: none;
     color: rgb(10, 138, 189);
     border: none;
     margin-left: 10px;
 }
-.container-login .go-to-singin button:hover{
+.inputs-enter .go-to-other-page button:hover{
     text-decoration: underline;
 } 
