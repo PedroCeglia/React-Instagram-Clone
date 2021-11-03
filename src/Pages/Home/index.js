@@ -16,7 +16,7 @@ export default function Home(){
         if(isLog === "false"){
             history.push('/')
         }
-    },[isLog])
+    },[isLog, history])
 
     return(
         <div className='container-home'>
