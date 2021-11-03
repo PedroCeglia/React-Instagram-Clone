@@ -1,3 +1,5 @@
+// Import React
+import { useState, useEffect } from "react";
 // Auth Reference
 import { auth } from "../FirebaseConfig";
 // Auth Functions
@@ -60,16 +62,13 @@ export function singInUser(email, password){
 }
 
 // verify Listener if user is log
-export function verifyListenerUserIsLog(isLog, setIsLog){
-    onAuthStateChanged(auth, user =>{
-        if(user){
-            setIsLog("true")
-            console.log(isLog)            
-        }else{
-            setIsLog("false")
-            console.log(isLog)            
-        }
-    })
+export function VerifyListenerUserIsLog(){
+    const [isLog, setIsLog] = useState()
+    useEffect(()=>{
+        const listener = onAuthStateChanged(auth, user => (user)?setIsLog("true"):setIsLog("false"))
+        return listener
+    },[])
+    return isLog
 }
 
 // verify if user is log
