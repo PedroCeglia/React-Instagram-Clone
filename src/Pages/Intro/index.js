@@ -10,7 +10,7 @@ import { verifyUserIsLog } from '../../Firebase/ApiAuth'
 export default function Intro(){
     const history = useHistory()
     function setPage(){
-        if(verifyUserIsLog() == "true"){
+        if(verifyUserIsLog() === "true"){
             history.push('/home')
         }else{
             history.push('/enter')
@@ -21,7 +21,7 @@ export default function Intro(){
     })
     return(
         <div className='container-intro'>
-            <img src='assets/logo-black-white.png'/>
+            <img src='assets/logo-black-white.png' alt='Logo Black And White'/>
         </div>
     )
 }

@@ -11,8 +11,24 @@ export function createUser(name, email, password){
             user.displayName(name)
             // ADD USER IN DATABASE
         }).catch(erro => {
-            console.log(erro.mensage)
-            console.log(erro.code)
+            if(erro){
+                const errorCode = erro.code;
+                switch (errorCode){
+                    case 'auth/invalid-email':
+                        alert('Digite um valor de e-mail valido! Ex) ...@gmail.com')
+                        break
+                    case 'auth/email-already-exists':
+                        alert('Já existe um usuario com este e-mail!')
+                        break
+                    case 'auth/weak-password':
+                        alert('Digite uma senha com no minimo 6 digitos')
+                        break        
+                    default:
+                        alert('Erro Prencha todos os Campos de Forma Correta')
+                        break                             
+                }
+                console.log(errorCode)               
+            }
         })
 }
 
@@ -22,8 +38,24 @@ export function singInUser(email, password){
         .then(snapshot =>{
 
         }).catch(erro => {
-            console.log(erro.mensage)
-            console.log(erro.code)            
+            if(erro){
+                const errorCode = erro.code;
+                switch (errorCode){
+                    case 'auth/user-not-found':
+                        alert('Não há registro de usuário existente correspondente ao identificador fornecido.')
+                        break
+                    case 'auth/invalid-email':
+                        alert('Digite um valor de e-mail valido! Ex) ...@gmail.com')
+                        break
+                    case 'auth/wrong-password' :
+                        alert('Senha Incorreta, tente de novo!')
+                        break   
+                    default:
+                        alert('Erro Prencha todos os Campos de Forma Correta')
+                        break       
+                }
+                console.log(errorCode)            
+            }           
         })
 }
 
@@ -42,7 +74,7 @@ export function verifyListenerUserIsLog(isLog, setIsLog){
 
 // verify if user is log
 export function verifyUserIsLog(){
-    if(auth.currentUser != null){
+    if(auth.currentUser !== null){
         return "true"
     } else{
         return "false"
