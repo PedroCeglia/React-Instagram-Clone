@@ -1,12 +1,30 @@
 import React, { useState } from 'react'
 import './style.css'
 
+// Import ApiAuth
+import { createUser } from '../../../../Firebase/ApiAuth'
+
 export default function SingIn(){
 
     // Leitura de Campos e SingIn
     const [campoNome, setCampoNome] = useState('')
     const [campoEmail, setCampoEmail] = useState('')
     const [campoSenha, setCampoSenha] = useState('')
+    function verificaCampos(){
+        if(campoNome.length >= 4){
+            if(campoEmail.indexOf('@') > -1){
+                if(campoSenha.length > 6){
+                    createUser(campoNome, campoEmail, campoSenha)
+                } else{
+                    alert("A Senha Precisa Ter Mais De 6 Digitos")
+                }
+            }else{
+                alert("Digite Um Email Valido")
+            }
+        }else{
+            alert("O Nome Deve Ter Mais De 3 Letras")
+        }
+    }
 
     // Acesso a Area de Login
     function changeToLogIn(){
@@ -29,7 +47,7 @@ export default function SingIn(){
                         value={campoSenha} onChange={text => {setCampoSenha(text.target.value)}}
                 />
 
-                <button className='btn-enter'>Cadastrar</button>
+                <button className='btn-enter' onClick={verificaCampos}>Cadastrar</button>
 
                 <div className='container-ou'>
                     <span className='border-line'></span>
