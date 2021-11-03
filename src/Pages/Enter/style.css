@@ -4,10 +4,14 @@
     justify-content: center;
     align-items: center;
 
+    min-width: 300px;
+    min-height: 380px;
+
     height: 100vh;
+    width: 100vw;
 
     background-color: cornsilk;
-    
+    overflow: hidden;    
 }
 .container-inputs{
     display: flex;
@@ -42,7 +46,8 @@
     padding: 20px;
 }
 .inputs-enter.default{
-    left: -100%;
+    transform: scale(0) rotate(360deg);
+    transition: all 1s;
 }
 
 /* 1st Container */
