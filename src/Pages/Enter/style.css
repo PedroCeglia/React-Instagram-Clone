@@ -21,3 +21,89 @@
     overflow: hidden;
 }
 
+/* ------------------------ ---------------- ------------------ */
+/* Container Main */
+.inputs-enter{
+    position: absolute;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid rgba(0,0,0,0.2);
+    background-color: rgba(255, 255, 255, 0.7);
+    
+    border-radius: 20px;
+    padding: 20px;
+}
+.inputs-enter.default{
+    left: -100%;
+}
+
+/* 1st Container */
+.inputs-enter .logo-name{
+    max-width: 260px;
+    width: 100%;
+    min-width: 180px;
+    height: 70px;
+    margin: 20px;
+}
+.inputs-enter input{
+    max-width: 320px;
+    width: 100%;
+    min-width: 180px;
+    padding: 10px 5px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.5);
+}
+.inputs-enter .btn-enter{
+    background-color: rgba(0, 158, 160, 0.514);
+    width: 100%;
+    padding: 10px 5px;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+
+    border-radius: 20px;
+
+}
+.inputs-enter .btn-enter:hover{
+    background-color: rgb(3, 117, 121);
+}
+/* Container Ou*/
+.inputs-enter .container-ou{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    margin: 20px 0;
+}
+.inputs-enter .container-ou .border-line{
+    width: 100%;
+    border: 2px solid rgba(0,0,0,0.4);
+    border-radius: 20px;
+}
+.inputs-enter .container-ou .ou{
+    margin: 0 20px;
+    font-size: 1.2em;
+    color: rgba(0,0,0,0.7);
+}
+
+/* Container Go to Another Page */
+.inputs-enter .go-to-other-page button{
+    background: none;
+    color: rgb(10, 138, 189);
+    border: none;
+    margin-left: 10px;
+}
+.inputs-enter .go-to-other-page button:hover{
+    text-decoration: underline;
+} 
+

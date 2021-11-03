@@ -3,6 +3,7 @@ import './style.css'
 
 // Import Widgets
 import Login from './Widgets/Login'
+import SingIn from './Widgets/Singin'
 
 export default function Enter(){
     return(
@@ -11,6 +12,7 @@ export default function Enter(){
             </div>
             <div className='container-inputs'>
                 <Login/>
+                <SingIn/>
             </div>
         </div>
     )
