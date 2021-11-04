@@ -5,7 +5,7 @@ import { auth } from "../FirebaseConfig";
 // Auth Functions
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile} from "@firebase/auth";
 //import ApiDatabase
-import { createUserInDatabase, setUserNameDatabase } from "../ApiDatabase";
+import { createUserInDatabase, setUserFotoInDatabse, setUserNameDatabase } from "../ApiDatabase";
 
 // create user 
 export function createUser(name, email, password){
@@ -47,6 +47,16 @@ export function setName(name, id){
         setUserNameDatabase(name, id)
     }).catch(erro => {
         console.log(erro.code)
+    })
+}
+
+// set User Foto
+export function setUserFoto(url){
+    updateProfile(auth.currentUser,{
+        photoURL:url
+    }).then(()=>{
+        // Set In Database
+        setUserFotoInDatabse(url, auth.currentUser.uid)
     })
 }
 
@@ -104,10 +114,6 @@ export function logOutUser(){
 // return User Log
 export function getUserLog(){
     if(auth.currentUser !== null){
-        return {
-            nome:auth.currentUser.displayName,
-            id:auth.currentUser.uid,
-            email:auth.currentUser.email
-        }
+        return auth.currentUser
     }
 }
