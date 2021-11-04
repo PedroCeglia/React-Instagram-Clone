@@ -26,6 +26,13 @@ export default function SingIn(){
         }
     }
 
+    // SingIn With Enter
+    function singInWithEnter(e){
+        if(e.key === "Enter"){
+            verificaCampos()
+        }
+    }
+
     // Acesso a Area de Login
     function changeToLogIn(){
         let singIn = document.querySelector('.inputs-enter.singin')
@@ -43,7 +50,7 @@ export default function SingIn(){
                 <input type='email' placeholder='Email'
                         value={campoEmail} onChange={text => {setCampoEmail(text.target.value)}}
                 />
-                <input type='password' placeholder='Password'
+                <input type='password' placeholder='Password' onKeyPress={e => {singInWithEnter(e)}}
                         value={campoSenha} onChange={text => {setCampoSenha(text.target.value)}}
                 />
 

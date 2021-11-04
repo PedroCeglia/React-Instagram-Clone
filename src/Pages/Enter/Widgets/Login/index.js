@@ -30,16 +30,23 @@ export default function Login(){
         login.classList.toggle('default')
     }
 
+    // Login With Enter
+    function logarEnter(e){
+        if(e.key === "Enter"){
+            verificaCampos()
+        }
+    }
+
     return(
         <div className='inputs-enter login default'>
             <img className='logo-name' src='assets/logo-nome.png' alt='Logo Nome'/>
             <input type='email' placeholder='Email'
                     value={campoEmail} onChange={text => {setCampoEmail(text.target.value)}}
             />
-            <input type='password' placeholder='Password'
+            <input type='password' placeholder='Password' onKeyPress={e => {logarEnter(e)}}
                     value={campoSenha} onChange={text => {setCampoSenha(text.target.value)}}
             />
-            <button className='btn-enter' onClick={verificaCampos}>Logar</button>
+            <button className='btn-enter'  onClick={verificaCampos}>Logar</button>
             <div className='container-ou'>
                 <span className='border-line'></span>
                 <span className='ou'>Ou</span>
