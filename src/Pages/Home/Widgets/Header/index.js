@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import './style.css'
 
+// Import Route Libs
+import { Link } from 'react-router-dom'
+
 // Import AuthApi
 import { getUserLog, logOutUser } from '../../../../Firebase/ApiAuth'
 
@@ -19,9 +22,8 @@ export default function Header(props){
         }
     },[user])
 
+    // Set Image Diretory
     const [srcDiretory, setSrcDirectory] = useState('')
- 
-    
     useEffect(()=>{
         if(props.pathname != null){
             const listSplit = props.pathname.split('/')
@@ -35,7 +37,7 @@ export default function Header(props){
             }        
         }   
     },[props.pathname])
-
+ 
     return(
         <div className='container-home'>
             <div className="header-home">
@@ -47,15 +49,27 @@ export default function Header(props){
                     <input id='search-view' type='text' placeholder='Search'/>
                 </div>
                 <div className='header-icons'>
-                    <img src={srcDiretory + 'assets/home.png'} alt='Home Icon'/>
-                    <img src={srcDiretory + 'assets/direct.png'} alt='Direct Icon'/>
-                    <img src={srcDiretory + 'assets/add-post.png'} alt='Post Icon'/>
-                    <img src={srcDiretory + 'assets/bussola.png'} alt='Search Icon'/>
+                    <Link to='/home'>
+                        <img src={srcDiretory + 'assets/home.png'} alt='Home Icon'/>
+                    </Link>
+
+                    <Link to='/home/direct'>
+                        <img src={srcDiretory + 'assets/direct.png'} alt='Direct Icon'/>
+                    </Link>
+
+                    <Link to='/home/post'>
+                        <img src={srcDiretory + 'assets/add-post.png'} alt='Post Icon'/>
+                    </Link>
+
+                    <Link to='/home/explore'>
+                        <img src={srcDiretory + 'assets/bussola.png'} alt='Search Icon'/>
+                    </Link>
+
                     <img src={srcDiretory + 'assets/like.png'} alt='Like Icon'/>
-                    <img className={'image-perfil-icon'} src={srcUserFoto} alt='user perfil foto'/>
+                    <Link to='/home/perfil'><img className={'image-perfil-icon'} src={srcUserFoto} alt='user perfil foto'/></Link>
                 </div>
             </div>
             <button onClick={logOutUser}> west cost bitch</button>
         </div>
     )
-}
+} 

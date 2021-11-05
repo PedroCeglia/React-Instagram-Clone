@@ -4,12 +4,14 @@ import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 // import Api Auth
 import {verifyUserIsLog} from "../Firebase/ApiAuth"
 // import Pages
-import Home from "../Pages/Home";
 import Intro from "../Pages/Intro";
 import Enter from "../Pages/Enter";
-// Import
+import Home from "../Pages/Home";
+// import Pages Contents
 import Post from "../Pages/Home/Widgets/Post";
 import Perfil from "../Pages/Home/Widgets/Perfil";
+import Direct from "../Pages/Home/Widgets/Direct"
+import Explore from "../Pages/Home/Widgets/Explore"
 
 
 
@@ -37,6 +39,8 @@ export default function Rotas(){
                 <PrivateRoute exact path='/home'  log={"true"} component={Home} pathRedirect='/'/>
                 <Route exact path='/home/perfil' component={Perfil}/>
                 <Route exact path='/home/post' component={Post} />
+                <Route exact path='/home/direct' component={Direct} />
+                <Route exact path='/home/explore' component={Explore} />
             </Switch>
         </BrowserRouter>
     )
