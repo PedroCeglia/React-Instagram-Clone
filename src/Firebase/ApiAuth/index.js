@@ -60,7 +60,7 @@ export function setUserFoto(url){
     })
 }
 
-// login user
+// login user 
 export function singInUser(email, password){
     signInWithEmailAndPassword(auth, email, password)
         .then(snapshot =>{
@@ -115,5 +115,6 @@ export function logOutUser(){
 export function getUserLog(){
     if(auth.currentUser !== null){
         return auth.currentUser
+
     }
 }
