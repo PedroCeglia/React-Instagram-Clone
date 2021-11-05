@@ -5,10 +5,10 @@ import './style.css'
 import {useLocation, useHistory} from 'react-router-dom'
 
 // Import ApiAuth
-import {VerifyListenerUserIsLog} from '../../../../Firebase/ApiAuth'
+import {VerifyListenerUserIsLog} from '../../Firebase/ApiAuth'
 
 // Import Widgets
-import Header from '../Header'
+import Header from '../../Widgets/Header'
 
 export default function Explore(){
     

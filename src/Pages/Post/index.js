@@ -1,16 +1,16 @@
-import React,{useEffect} from 'react'
+import React, {useEffect} from 'react'
 import './style.css'
 
-// Import Router Libs
-import { useHistory, useLocation } from 'react-router'
+// Import Router Lib
+import { useLocation, useHistory } from 'react-router'
 
 // Import AuthApi
-import { VerifyListenerUserIsLog} from '../../../../Firebase/ApiAuth'
+import { VerifyListenerUserIsLog } from '../../Firebase/ApiAuth'
 
 // Import Widgets
-import Header from '../Header'
+import Header from '../../Widgets/Header'
 
-export default function Perfil(){
+export default function Post(){
     
     // Listener IsLog
     const isLog = VerifyListenerUserIsLog()
@@ -31,7 +31,7 @@ export default function Perfil(){
             <Header
                 pathname={pathName}
             />
-            Perfil
+            Post
         </div>
     )
 }

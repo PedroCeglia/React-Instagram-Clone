@@ -7,11 +7,10 @@ import {verifyUserIsLog} from "../Firebase/ApiAuth"
 import Intro from "../Pages/Intro";
 import Enter from "../Pages/Enter";
 import Home from "../Pages/Home";
-// import Pages Contents
-import Post from "../Pages/Home/Widgets/Post";
-import Perfil from "../Pages/Home/Widgets/Perfil";
-import Direct from "../Pages/Home/Widgets/Direct"
-import Explore from "../Pages/Home/Widgets/Explore"
+import Post from "../Pages/Post";
+import Perfil from "../Pages/Perfil";
+import Direct from "../Pages/Direct"
+import Explore from "../Pages/Explore"
 
 
 

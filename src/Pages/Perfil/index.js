@@ -1,16 +1,16 @@
-import React, {useEffect} from 'react'
+import React,{useEffect} from 'react'
 import './style.css'
 
-// Import Router lib
-import {useLocation, useHistory} from 'react-router-dom'
+// Import Router Libs
+import { useHistory, useLocation } from 'react-router'
 
-// Import ApiAuth
-import {VerifyListenerUserIsLog} from '../../../../Firebase/ApiAuth'
+// Import AuthApi
+import { VerifyListenerUserIsLog} from '../../Firebase/ApiAuth'
 
 // Import Widgets
-import Header from '../Header'
+import Header from '../../Widgets/Header'
 
-export default function Direct(){
+export default function Perfil(){
     
     // Listener IsLog
     const isLog = VerifyListenerUserIsLog()
@@ -31,7 +31,7 @@ export default function Direct(){
             <Header
                 pathname={pathName}
             />
-            Direct
+            Perfil
         </div>
     )
 }
