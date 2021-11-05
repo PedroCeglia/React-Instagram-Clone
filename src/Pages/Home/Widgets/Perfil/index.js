@@ -1,15 +1,17 @@
-import React, {useEffect} from 'react'
+import React,{useEffect} from 'react'
 import './style.css'
 
 // Import Router Libs
 import { useHistory, useLocation } from 'react-router'
 
 // Import AuthApi
-import { VerifyListenerUserIsLog} from '../../Firebase/ApiAuth'
-import Header from './Widgets/Header'
+import { VerifyListenerUserIsLog} from '../../../../Firebase/ApiAuth'
 
-export default function Home(){
+// Import Widgets
+import Header from '../Header'
 
+export default function Perfil(){
+    
     // Listener IsLog
     const isLog = VerifyListenerUserIsLog()
 
@@ -25,13 +27,11 @@ export default function Home(){
     const pathName = useLocation().pathname
 
     return(
-            <div>   
-                <Header
-                    pathname={pathName}
-                />
-            </div>
+        <div>
+            <Header
+                pathname={pathName}
+            />
+            Perfil
+        </div>
     )
 }
-/*
-
-*/
