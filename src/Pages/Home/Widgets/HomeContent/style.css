@@ -4,9 +4,23 @@
     justify-content: flex-start;
     align-items: center;
 
+    position: absolute;
+    top: 100px;
+
     overflow-x: hidden;  
     width: 50vw;
 }
+@media all and (max-width:950px){
+    .home-content{
+        left: 25vw;
+    }
+}
+@media all and (min-width:950px){
+    .home-content{
+        left: 7vw;
+    }
+}
+
 .home-content .post-container,
 .home-content .story-container{
     width: 100%;

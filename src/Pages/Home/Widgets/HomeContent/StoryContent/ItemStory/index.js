@@ -14,11 +14,11 @@ export default function ItemStory(props) {
         if(props.name != null){
             setItemName(props.name)
         }
-    })
+    },[props.foto, props.name])
     
     return(
         <div className='story-item'>
-            <img src={srcItemImage} alt='User Perfil Image'/>
+            <img src={srcItemImage} alt='User Perfil'/>
             <span>{itemName}</span>
         </div>
     )

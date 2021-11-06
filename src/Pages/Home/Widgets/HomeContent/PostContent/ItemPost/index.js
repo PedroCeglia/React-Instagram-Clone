@@ -6,13 +6,13 @@ export default function ItemPost(){
         <div className='post-item'>
             <div className='post-header'>
                 <div className='user-date-post'>
-                <img className='perfil-foto-post' src='assets/perfil.png' alt='User Perfil Photo'/>
+                <img className='perfil-foto-post' src='assets/perfil.png' alt='User Perfil'/>
                 <span>User</span>
                 </div>
                 <img className='menu-post' src='assets/menu.png' alt='Menu Icon'/>
             </div>
             <div className='post-midia'>
-                <img src='assets/perfil.png' alt='Main Post Photo'/>
+                <img src='assets/perfil.png' alt='Main Post'/>
             </div>
             <div className='post-icons'>
                 <div className='icons-left'>
