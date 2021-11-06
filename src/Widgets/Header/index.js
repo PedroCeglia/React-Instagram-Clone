@@ -5,7 +5,7 @@ import './style.css'
 import { Link } from 'react-router-dom'
 
 // Import AuthApi
-import { getUserLog, logOutUser } from '../../Firebase/ApiAuth'
+import { getUserLog } from '../../Firebase/ApiAuth'
 
 export default function Header(props){
 
