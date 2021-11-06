@@ -1,0 +1,13 @@
+.home-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    overflow-x: hidden;  
+    width: 50vw;
+}
+.home-content .post-container,
+.home-content .story-container{
+    width: 100%;
+}

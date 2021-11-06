@@ -1,0 +1,142 @@
+/* Post Item Container */
+.post-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 50vw;
+
+    background-color: #fff;
+    margin: 20px 0;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+/* Post Header Container */
+.post-item .post-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+
+    border-bottom: 1px solid rgba(0,0,0,0.22);
+}
+.post-item .post-header .user-date-post{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.post-icons .post-header.user-date-post span{
+    font-weight: bold;
+    color: rgba(0,0,0,0.8);
+}
+.post-item .post-header .user-date-post .perfil-foto-post{
+    width: 30px;
+    height: 30px;
+
+    object-fit: cover;
+    border-radius: 50%;
+
+    margin-right: 20px;
+}
+.post-item .post-header .menu-post{
+    width: 15px;
+
+    object-fit: cover;
+}
+
+/* Media Post Container */
+.post-item .post-midia,
+.post-item .post-midia img{
+    width: 100%;
+}
+
+/* Icons Post */
+.post-item .post-icons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    padding: 10px;
+
+    border-top: 1px solid rgba(0,0,0,0.22);
+}
+.post-item .post-icons .icons-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.post-item .post-icons img{
+    width: 30px;
+    object-fit: cover;
+}
+.post-item .post-icons .icons-left img{
+    margin-left: 10px;
+}
+
+/* Like Post */
+.post-item .post-like{
+    width: 100%;
+    padding: 10px;
+}
+.post-item .post-like span{
+    color: rgba(0,0,0,0.8);
+    font-weight: bold;
+}
+
+/* Descrição Post */
+.post-item .post-descricao{
+    width: 100%;
+}
+.post-item .post-descricao .user-name{
+    margin: 0 10px;
+    font-weight: bold;
+    color: rgba(0,0,0,0.7);
+}
+.post-item .post-descricao p{
+    color: rgba(0,0,0,0.8);
+}
+
+/* Comentario Post */
+.post-item .post-comentarios{
+    width: 100%;
+    margin: 10px 0;
+}
+.post-item .post-comentarios span{
+    color: rgba(0,0,0,0.6);
+    margin: 10px 20px;
+}
+
+/* Comentar Post */
+.post-item .post-comentar{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    padding: 0 10px;
+
+    border-top: 1px solid rgba(0,0,0,0.08);
+}
+.post-item .post-comentar input{
+    padding: 10px;
+
+    width: 100%;
+
+    border: 0px;
+    outline: 0;
+
+}
+.post-item .post-comentar span{
+    color: skyblue;
+}
+.post-item .post-comentar span.active{
+    color: #1E88E5;
+}
+
+

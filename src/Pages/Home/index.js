@@ -6,7 +6,11 @@ import { useHistory, useLocation } from 'react-router'
 
 // Import AuthApi
 import { VerifyListenerUserIsLog} from '../../Firebase/ApiAuth'
+
+// Import Widgets
 import Header from '../../Widgets/Header'
+import HomeContent from './Widgets/HomeContent'
+import HomeNav from './Widgets/HomeNav'
 
 export default function Home(){
 
@@ -25,19 +29,13 @@ export default function Home(){
     const pathName = useLocation().pathname
 
     return(
-            <div>   
+            <div className='container-home-main'>   
                 <Header
                     pathname={pathName}
                 />
-                <div className='home-container'>
-                    <div className='home-content'>
-                        <div className='story-container'></div>
-                        <div className='post-container'></div>
-                    </div>
-                    <div className='home-nav'>
-                        <div className='your-date-home-container'></div>
-                        <div className='sugestoes-container'></div>
-                    </div>
+                <div className='container-home'>
+                    <HomeContent/>
+                    <HomeNav/>
                 </div>
             </div>
     )
