@@ -1,0 +1,35 @@
+/* User Item List */
+.user-item-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 5px;
+    padding: 10px;
+
+    border: 1px solid rgba(0,0,0,0.05);
+
+    width: 90%;
+}
+.user-item-list .user-dates{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-item-list .user-dates img{
+    width: 30px;
+    height: 30px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+.user-item-list .user-dates span{
+    color: rgba(0,0,0,0.7);
+    margin-left: 10px;
+    cursor: pointer;
+}
+.user-item-list .user-dates span:hover{
+    text-decoration: underline;
+    color: rgba(0,0,0,1);
+}
