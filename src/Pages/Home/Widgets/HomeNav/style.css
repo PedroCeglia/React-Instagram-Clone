@@ -1,3 +1,102 @@
-.home-nav div{
-    display: none;
+/* Nav Home */
+@media all and (max-width:950px){
+    .home-nav{
+        display: none;
+    }
 }
+@media all and (min-width:950px){
+    .home-nav{
+        position: fixed;
+        top: 120px;
+        right: 7vw;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}
+
+/* Your Date Home Container */
+.your-date-home-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0,0,0,0.2);
+    padding: 10px;
+
+    width: 30vw;
+}
+.your-date-home-container .your-date{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.your-date-home-container .your-date img{
+    width: 50px;
+    height: 50px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    margin: 0 10px;
+}
+.your-date-home-container span{
+    color: #1E88E5;
+    cursor: pointer;
+}
+.your-date-home-container .your-date span{
+    color: rgba(0,0,0,0.7);
+}
+
+
+/* Sugestao Container */
+.sugestoes-container{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    border: 1px solid rgba(0,0,0,0.2);
+    background-color: rgba(255, 255, 255, 0.5);
+    
+    margin: 10px 0;
+    padding: 10px;
+
+    width: 30vw;
+}
+
+/* Sugestão Descricao */
+.sugestoes-container .sugestao-descricao{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 10px;
+
+    width: 100%;
+}
+.sugestoes-container .sugestao-descricao span{
+    color: rgba(0,0,0,0.7);
+    text-decoration: none;
+
+    cursor: pointer;
+}
+.sugestoes-container .sugestao-descricao .ver-tudo:hover{
+    text-decoration: underline;
+}
+
+/* Sugestao List */
+.sugestoes-container .sugestao-user-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 100%;
+}
+
