@@ -1,0 +1,115 @@
+.perfil-container{
+    position: absolute;
+    top: 70px;
+
+    width: 100vw;
+
+    min-height: calc(100vh - 70px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    background-color: #f5f5f5;
+}
+/* User Information */
+.perfil-container .perfil-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 70vw;
+
+    margin: 20px 0;
+}
+/* User Image */
+.perfil-container .perfil-info img{
+    width: 150px;
+    height: 150px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+/* Perfil Text Information */
+.perfil-container .perfil-info .text-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    align-self: flex-start;
+
+    width: 70%;
+}
+
+.perfil-container .perfil-info .text-info div{
+    margin: 10px;
+}
+
+
+/* User Name End Edit Perfil */
+.perfil-container .perfil-info .text-info div .user-name{
+    color: rgba(0,0,0,0.7);
+    font-weight: 200;
+    font-size: 1.6em;
+    margin-right: 20px;
+}
+.perfil-container .perfil-info .text-info div button{
+   background-color: transparent;
+    border:1px solid rgba(0,0,0,0.2);
+   
+    font-size: 1.1em;
+   
+    padding: 5px 10px;
+
+    cursor: pointer;
+    border-radius: 10px;
+    
+}
+.perfil-container .perfil-info .text-info div button:hover{
+    box-shadow: 0 0 5px rgba(0,0,0,0.4);
+}
+
+/* Perfil Number Information */
+.perfil-container .perfil-info .text-info .perfil-number{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 70%;
+}
+.perfil-container .perfil-info .text-info .perfil-number .seguindo,
+.perfil-container .perfil-info .text-info .perfil-number .seguidores{
+    cursor: pointer;
+}
+
+/* Perfil Description */
+.perfil-container .perfil-info .text-info p{
+    width: 50%;
+    font-size: 1.05em;
+    color: rgba(0,0,0,0.8);
+    margin: 10px;
+} 
+
+
+/* Perfil Puvlicações */
+.perfil-container .perfil-publicacao{
+    width: 80vw;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    flex-wrap: wrap;
+
+    padding-top: 20px;
+    border-top: 2px solid rgba(0,0,0,0.2);
+}
+.perfil-container .perfil-publicacao img{
+    width: 25vw;
+
+    object-fit: fill;
+
+    margin: 10px;
+} 
