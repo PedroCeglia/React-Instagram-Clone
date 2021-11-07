@@ -1,0 +1,141 @@
+/* Direct Container Content */
+.direct-container .direct-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 50vw;
+    height: 80vh;
+
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+
+}
+
+/* Direct Container Content Chat None*/
+.direct-container .direct-content .chat-none-direct.none{
+    display: none;
+}
+.direct-container .direct-content .chat-none-direct{
+    height: 100%;
+    width: 100%;
+
+    background: linear-gradient(-60.76deg, rgb(150, 121, 255) 0%, rgb(212, 153, 234) 57.96%, rgb(238, 164, 179) 100%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.direct-container .direct-content .chat-none-direct img{
+    width: 10%;
+    margin-bottom: 20px;
+}
+.direct-container .direct-content .chat-none-direct p{
+    font-size: 1.2em;
+    color: rgba(255,255,255,0.7);
+}
+
+/* Direct Container Content Has Chat*/
+.direct-container .direct-content .has-chat.none{
+    display: none;
+}
+.direct-container .direct-content .has-chat{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 100%;
+    height: 100%;
+
+}
+ 
+/* Direct Container Content Has Chat Header */
+.direct-container .direct-content .has-chat .direct-content-header{
+    width: 100%;
+    background-color: rgba(255,255,255,0.5);
+    
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 12px 0;
+
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+
+    cursor: pointer;
+}
+.direct-container .direct-content .has-chat .direct-content-header img{
+    width: 30px;
+    height: 30px;
+
+    object-fit: cover;
+    border-radius: 50%;
+
+    margin: 0 20px;
+}
+.direct-container .direct-content .has-chat .direct-content-header span{
+    color: rgba(0,0,0,0.7);
+    font-size: 1.2em;
+}
+
+/* Direct Container Content Has Chat Content*/
+.direct-container .direct-content .has-chat .direct-content-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 100%;
+    height: 100%;
+}
+/* Direct Container Content Has Chat Content Mensage List */
+.direct-container .direct-content .has-chat .direct-content-content .direct-mensage-list{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    overflow-y: auto;
+}
+
+/* Direct Container Content Has Chat Content KeyBoard */
+.direct-container .direct-content .has-chat .direct-content-content .direct-keyboard{
+    width: 90%;
+    margin: 10px;
+
+    align-self: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid rgba(0,0,0,0.2);
+    background-color: rgba(255,255,255,0.5);
+
+    
+    border-radius: 20px;
+}
+.direct-container .direct-content .has-chat .direct-content-content .direct-keyboard input{
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 10px;
+    margin: 0 20px;
+
+    width: 100%;
+
+    cursor: pointer;
+
+}
+.direct-container .direct-content .has-chat .direct-content-content .direct-keyboard span{
+    margin:0 20px;
+    color: #1E88E5;
+    font-size: 1.1em;
+
+    cursor: pointer;
+}  

@@ -1,0 +1,52 @@
+.sms-you, .sms-friend{
+    margin: 10px;
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+
+    max-width: 50vw;
+    max-height: 50vh;
+    
+    padding: 10px;
+}
+/* Image And Video */
+div.sms-you, div.sms-friend{
+    flex-direction: column;
+    align-items: flex-end;
+}
+.sms-you img, .sms-friend img{
+    display: block;
+    max-width: 40vw;
+    max-height: 40vh;
+}
+.sms-you video, .sms-friend video{
+    display: block;
+    max-width: 40vw;
+    max-height: 40vh;
+}
+.sms-you source, .sms-friend source{
+    width: 100%;
+}
+
+/* All */
+.sms-you{
+    align-self: flex-end;
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.sms-friend{
+    align-self: flex-start;
+    background-color: thistle;
+}
+.sms-hour{
+    font-size: 10px;
+    font-weight: normal;
+    align-self: flex-end;
+    color: rgba(0, 0, 0, 0.5);
+    margin-left: 10px;
+}  
