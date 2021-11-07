@@ -9,6 +9,8 @@ import {VerifyListenerUserIsLog} from '../../Firebase/ApiAuth'
 
 // Import Widgets
 import Header from '../../Widgets/Header'
+import DirectContent from './Widgets/DirectContent'
+import DirectNav from './Widgets/DirectNav'
 
 export default function Direct(){
     
@@ -31,7 +33,12 @@ export default function Direct(){
             <Header
                 pathname={pathName}
             />
-            Direct
+            <div className='direct-container'>
+                <DirectNav
+                    pathname={pathName}
+                />
+                <DirectContent/>
+            </div>
         </div>
     )
 }
