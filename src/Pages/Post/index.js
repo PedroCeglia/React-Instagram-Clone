@@ -31,7 +31,13 @@ export default function Post(){
             <Header
                 pathname={pathName}
             />
-            Post
+            <div className='post-page-container'>
+                <div className='post-content'>
+                    <img src='../assets/add-post.png' alt='Add Post Icon'/>
+                    <label htmlFor='input-add-post'>Selecione um arquivo do computador</label>
+                    <input type='file' id='input-add-post'/>
+                </div>
+            </div>
         </div>
     )
 }
