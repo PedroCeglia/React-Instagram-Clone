@@ -1,8 +1,14 @@
+.perfil-page-main-container{
+    width: 100vw;
+    overflow-x: hidden;
+}
+ 
 .perfil-container{
     position: absolute;
     top: 70px;
 
-    width: 100vw;
+    width: 100%;
+    overflow-x: hidden;
 
     min-height: calc(100vh - 70px);
 

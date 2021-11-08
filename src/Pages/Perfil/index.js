@@ -32,7 +32,7 @@ export default function Perfil(){
                         Nossa loja @surfshopbrasil`
 
     return(
-        <div>
+        <div className='perfil-page-main-container'>
             <Header
                 pathname={pathName}
             />
