@@ -1,3 +1,6 @@
+.header-container-content-notify{
+    overflow-x: hidden;
+} 
 .header-home{
     display: flex;
     justify-content: space-around;

@@ -1,0 +1,29 @@
+.header-notify-content .header-notify-list .item-notify-container{
+    margin: 10px;
+    padding-bottom: 10px;
+
+    width: calc( 100% - 20px);
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+
+    cursor: pointer;
+}
+.header-notify-content .header-notify-list .item-notify-container img{
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+.header-notify-content .header-notify-list .item-notify-container .user-name{
+    font-size: 1.2em;
+    margin: 0 10px;
+}
+.header-notify-content .header-notify-list .item-notify-container .user-action{
+    color: rgba(0,0,0,0.5);
+} 
+ 
