@@ -3,6 +3,7 @@ import './style.css'
 
 // Import Router Libs
 import { useHistory, useLocation } from 'react-router'
+import { Link } from 'react-router-dom'
 
 // Import AuthApi
 import { VerifyListenerUserIsLog} from '../../Firebase/ApiAuth'
@@ -42,7 +43,7 @@ export default function Perfil(){
                     <div className='text-info'>
                         <div>
                             <span className='user-name'>user_name</span>
-                            <button>Editar Perfil</button>
+                            <Link to='/home/perfil/editar_perfil'><button>Editar Perfil</button></Link>
                         </div>
                         <div className='perfil-number'>
                             <span className='publicacoes'><strong>0</strong> Publicações</span>
