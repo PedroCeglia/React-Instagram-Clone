@@ -5,6 +5,11 @@ import { initializeApp } from "firebase/app";
 import {getDatabase} from "firebase/database"
 import {getAuth} from "firebase/auth"
 
+// Import V8
+import firebase from 'firebase/compat/app';
+// Compat Version Storage
+import 'firebase/compat/storage'
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -17,8 +22,13 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
   measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
-// Initialize Firebase
+// Initialize Firebase V9
 const app = initializeApp(firebaseConfig);
+
+// Initialize Compat Version
+firebase.initializeApp(firebaseConfig)
 
 export const auth = getAuth(app);
 export const database = getDatabase(app);
+export const storage = firebase.storage()
+export const storageEvent = firebase.storage.TaskEvent.STATE_CHANGED

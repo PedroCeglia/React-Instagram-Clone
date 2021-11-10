@@ -61,7 +61,7 @@ export function setUserFoto(url){
 }
 
 // set User Senha
-export function setUsePassword(password){
+export function setUserPassword(password){
     updatePassword(auth.currentUser, password).then(()=>{
         alert('Parabens, mudou de senha')
     })
