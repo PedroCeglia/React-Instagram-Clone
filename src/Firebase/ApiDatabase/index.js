@@ -29,4 +29,12 @@ export function setUserFotoInDatabse(url, id){
     update(userRef,{
         foto:url
     })
-} 
+}
+
+// Update User Description
+export function setUserDescription(descriptioion, id){
+    const userRef = ref(database, `usuarios/${id}`)
+    update(userRef,{
+        descricao: descriptioion
+    })
+}
