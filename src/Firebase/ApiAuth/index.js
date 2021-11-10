@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // Auth Reference
 import { auth } from "../FirebaseConfig";
 // Auth Functions
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile} from "@firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile, updatePassword} from "@firebase/auth";
 //import ApiDatabase
 import { createUserInDatabase, setUserFotoInDatabse, setUserNameDatabase } from "../ApiDatabase";
 
@@ -57,6 +57,13 @@ export function setUserFoto(url){
     }).then(()=>{
         // Set In Database
         setUserFotoInDatabse(url, auth.currentUser.uid)
+    })
+}
+
+// set User Senha
+export function setUsePassword(password){
+    updatePassword(auth.currentUser, password).then(()=>{
+        alert('Parabens, mudou de senha')
     })
 }
 
