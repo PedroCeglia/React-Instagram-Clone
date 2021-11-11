@@ -122,6 +122,5 @@ export function logOutUser(){
 export function getUserLog(){
     if(auth.currentUser !== null){
         return auth.currentUser
-
     }
 }
