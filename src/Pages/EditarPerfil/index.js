@@ -12,7 +12,9 @@ import { VerifyListenerUserIsLog, getUserLog, setName, setUserPassword} from '..
 import { setUserPerfilFoto } from '../../Firebase/ApiStorage'
 
 // Import DatabaseApi
-import {setUserDescriptionDatabase} from '../../Firebase/ApiDatabase'
+import {setUserDescriptionDatabase, getUserLogDatabase} from '../../Firebase/ApiDatabase'
+
+
 
 // Import Widgets
 import Header from '../../Widgets/Header'
@@ -56,7 +58,7 @@ export default function EditarPerfil(){
     const [inputSetPassword2, setInputSetPassword2] = useState('')
     ////////////////////////////////// Inputs Use State //////////////////////////// ^^^^^^^^^^^^^^
 
-    
+    ////////////////////////////////// User Auth ////////////////////////////////// vvvvvvvvvvvvvvvvv
     // User Name
     const [userName, setUserName] = useState('user_name')
     // Get User Auth
@@ -74,6 +76,31 @@ export default function EditarPerfil(){
         }
     },[userAuth])
 
+    ////////////////////////////////// User Auth ////////////////////////////////// ^^^^^^^^^^^^^^^
+
+    ////////////////////////////////// User Database ///////////////////////////// vvvvvvvvvvvvvvvvv
+    // User Description
+    const [userDescription, setUserDescription] = useState('')
+    const [userDatabase, setUserDatabase] = useState()
+    
+    // Carregando Dados do Usuario Database
+    useEffect(()=>{
+        if(userAuth != null){
+            getUserLogDatabase(userAuth.uid, setUserDatabase)
+        }
+    },[userAuth])
+    useEffect(()=>{
+        if(userDatabase != null){
+            if(userDatabase.descricao != null){
+                setUserDescription(userDatabase.descricao)
+                setInputUserDescription(userDatabase.descricao)
+            }
+        }
+    },[userDatabase])
+    ////////////////////////////////// User Database ///////////////////////////// ^^^^^^^^^^^^^^^^^
+
+
+
     // Change User Name
     function setUserNameInAuthAndDatabase(){
         if(inputUserName !== userName && inputUserName.length > 4){
@@ -89,15 +116,16 @@ export default function EditarPerfil(){
     }
     // Change User description
     function setUserDescriptionInDatabase(){
-        if(inputUserDescription !== "dddedede" && inputUserDescription.length > 20 && inputUserDescription.length < 120){
+        if(inputUserDescription !== userDescription && inputUserDescription.length > 20 && inputUserDescription.length < 120){
             setUserDescriptionDatabase(inputUserDescription, userAuth.uid)
+            setUserDescription(inputUserDescription)
         }
     }
 
     // Change User Password
     function setUserPasswordInAuth(){
-        if(inputSetPassword2 == inputSetPassword1 && inputSetPassword2.length > 6){
-            setUser
+        if(inputSetPassword2 === inputSetPassword1 && inputSetPassword2.length > 6){
+            setUserPassword()
         }
     }
 
@@ -113,12 +141,12 @@ export default function EditarPerfil(){
     },[inputUserName, userName])
     // user description
     useEffect(()=>{
-        if(inputUserDescription !== "dddedede" && inputUserDescription.length > 20 && inputUserDescription.length < 120){
+        if(inputUserDescription !== userDescription && inputUserDescription.length > 20 && inputUserDescription.length < 120){
             setSrcInputSetDescricaoImage('../../assets/check.png')
         } else{
             setSrcInputSetDescricaoImage('../../assets/pencil.png')
         }
-    },[inputUserDescription])
+    },[inputUserDescription, userDescription])
     // userPassword
     useEffect(()=>{
         if(inputSetPassword1.length>6){
@@ -129,7 +157,7 @@ export default function EditarPerfil(){
     },[inputSetPassword1])
     useEffect(()=>{
         if(inputSetPassword2.length>0){
-            if(inputSetPassword2 == inputSetPassword1){
+            if(inputSetPassword2 === inputSetPassword1){
                 setSrcInputSetPassword2Image('../../assets/check.png')
             } else{
                 setSrcInputSetPassword2Image('../../assets/close.png')
@@ -192,7 +220,7 @@ export default function EditarPerfil(){
                         <input type='password' placeholder='nova senha' value={inputSetPassword2} onChange={text => setInputSetPassword2(text.target.value)} />
                         <img src={srcInputSetPassword2Image} alt='Pencil Icon'/>
                     </div>
-                    <button>Alterar Senha</button>
+                    <button onClick={setUserPasswordInAuth}>Alterar Senha</button>
                 </div>
             </div>
         </div>
