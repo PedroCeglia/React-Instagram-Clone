@@ -1,0 +1,80 @@
+/* Container Follow List  */
+.container-follow-list{
+    display: block;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+
+    overflow: hidden;
+    z-index: 10;
+} 
+.container-follow-list.none{
+    display: none;
+}
+
+/* Container Follow List Arrond */
+.container-follow-list .container-follow-list-arrond{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Container Follow List Content */
+.container-follow-list .container-follow-list-content{
+    background-color: rgba(255,255,255,0.9);
+    width: 50%;
+    height: 50%;
+
+    position: absolute;
+    left: 25%;
+    top: 25%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+    box-shadow:  0 0 10px rgba(255,255,255,0.4);
+}
+
+/* Container Follow List Content Header */
+.container-follow-list .container-follow-list-content-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+.container-follow-list .container-follow-list-content-header span{
+    width: 100%;
+    text-align: center;
+}
+.container-follow-list .container-follow-list-content-header img{
+    width: 30px;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.container-follow-list .container-follow-list-content-header img:hover{
+    
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    transition: all 1s;
+}
+
+/* Container Follow List Content Content*/
+.container-follow-list .container-follow-list-content-main{
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+}
