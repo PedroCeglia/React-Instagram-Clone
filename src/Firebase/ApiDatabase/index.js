@@ -1,7 +1,7 @@
 // Import getDatabase
 import { database } from "../FirebaseConfig";
 // Import Database Functions
-import {set, ref, update, get} from '@firebase/database'
+import {set, ref, update, get, onValue} from '@firebase/database'
 
 // Create User In Database
 export function createUserInDatabase(email, id){
@@ -47,4 +47,30 @@ export function getUserLogDatabase(id, setUserDatabase){
         }
     })
 }
- 
+
+// Get User Posts
+export function getUserPosts(id, setUserPostList){
+    onValue(ref(database, `postagens/${id}`), snapshot => {
+        let listPost = []
+        if(snapshot.exists()){
+            snapshot.forEach( post =>{
+                listPost.push(post.val())
+            })
+            setUserPostList(listPost)
+        }
+    })
+}
+
+// Get User Follow List
+export function getFollowList(id, followType, setFollowList) {
+    onValue(ref(database, `${followType}/${id}`), snapshot => {
+        let listFollowsUsers = []
+        if(snapshot.exists()){
+            snapshot.forEach( user => {
+                listFollowsUsers.push(user.val())
+            })
+            setFollowList(listFollowsUsers)
+        }
+    })
+}
+  
