@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import './style.css'
 
 // Import Router Libs
@@ -6,10 +6,14 @@ import { useHistory, useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 
 // Import AuthApi
-import { VerifyListenerUserIsLog} from '../../Firebase/ApiAuth'
+import { VerifyListenerUserIsLog, getUserLog} from '../../Firebase/ApiAuth'
 
-// Import Widgets
+// Import DatabaseApi
+import { getUserLogDatabase, getUserPosts } from '../../Firebase/ApiDatabase'
+
+// Import Widgets 
 import Header from '../../Widgets/Header'
+import FollowList from './FollowList'
 
 export default function Perfil(){
     
@@ -27,10 +31,48 @@ export default function Perfil(){
     // Set Image Resource
     const pathName = useLocation().pathname
 
-    const descricao = `Página dedicada a expandir a cultura do surf 🌊🏄‍♂️ \n
-                        🌊🌊—-picos da zona sul nos stories—-🏄‍♂️ \n
-                        Procurando equipamentos de surf \n
-                        Nossa loja @surfshopbrasil`
+    const [descricao, setDescricao] = useState('')
+    const [userName, setUserName] = useState('')
+    const [userFoto, setUserFoto] = useState('../assets/perfil.png')
+    const [publicacoes, setPublicacoes] = useState(0)
+    const [seguindo, setSeguindo] = useState(0)
+    const [seguidores, setSeguidores] = useState(0)
+
+    // Get User Auth And Database
+    // And Config User Dates 
+    const userAuth = getUserLog()
+    const [userDatabase, setUserDatabase] = useState()
+    const [userPosts, setUserPosts] = useState([])
+    
+    useEffect(()=>{
+        if(userAuth != null){
+            getUserLogDatabase(userAuth.uid, setUserDatabase)
+            getUserPosts(userAuth.uid, setUserPosts)
+        }
+    },[userAuth])
+    useEffect(()=>{
+       if(userDatabase != null){
+           if(userDatabase.descricao != null){setDescricao(userDatabase.descricao)}
+           if(userDatabase.publicacoes != null){setPublicacoes(userDatabase.publicacoes)}
+           if(userDatabase.seguindo != null){setSeguindo(userDatabase.seguindo)}
+           if(userDatabase.seguidores != null){setSeguidores(userDatabase.seguidores)}
+           if(userDatabase.foto != null){setUserFoto(userDatabase.foto)}
+           setUserName(userDatabase.nome)
+       } 
+    },[userDatabase])
+
+    // Function Open FollowList
+    const [followType, setFollowType] = useState('')
+    function openFollowListSeguidores(){
+        let followList = document.querySelector('.container-follow-list')
+        followList.classList.toggle('none')
+        setFollowType('seguidores')
+    }
+    function openFollowListSeguindo(){
+        let followList = document.querySelector('.container-follow-list')
+        followList.classList.toggle('none')
+        setFollowType('seguindo')
+    }
 
     return(
         <div className='perfil-page-main-container'>
@@ -39,16 +81,16 @@ export default function Perfil(){
             />
             <div className='perfil-container'>
                 <div className='perfil-info'>
-                    <img src='../assets/perfil.png' alt='User Perfil' title='Alterar foto de perfil'/>
+                    <img src={userFoto} alt='User Perfil' title='Alterar foto de perfil'/>
                     <div className='text-info'>
                         <div>
-                            <span className='user-name'>user_name</span>
+                            <span className='user-name'>{userName}</span>
                             <Link to='/home/perfil/editar_perfil'><button>Editar Perfil</button></Link>
                         </div>
                         <div className='perfil-number'>
-                            <span className='publicacoes'><strong>0</strong> Publicações</span>
-                            <span className='seguidores'><strong>0</strong> Seguidores</span>
-                            <span className='seguindo'><strong>0</strong> Seguindo</span>
+                            <span className='publicacoes'><strong>{publicacoes}</strong> Publicações</span>
+                            <span className='seguidores' onClick={openFollowListSeguidores} ><strong>{seguidores}</strong> Seguidores</span>
+                            <span className='seguindo' onClick={openFollowListSeguindo} ><strong>{seguindo}</strong> Seguindo</span>
                         </div>
                         <p className='description'>
                             {descricao}
@@ -56,18 +98,21 @@ export default function Perfil(){
                     </div>
                 </div>
                 <div className='perfil-publicacao'>
-                    <img src='../assets/perfil.png' alt='Publicacao'/>
-                    <img src='../assets/perfil.png' alt='Publicacao'/>
-                    <img src='../assets/perfil.png' alt='Publicacao'/>
-                    <img src='../assets/perfil.png' alt='Publicacao'/>
-                    <img src='../assets/perfil.png' alt='Publicacao'/>
-                    <img src='../assets/perfil.png' alt='Publicacao'/>
-                    <img src='../assets/perfil.png' alt='Publicacao'/>
-                    <img src='../assets/perfil.png' alt='Publicacao'/>
-                    <img src='../assets/perfil.png' alt='Publicacao'/>
-                    <img src='../assets/perfil.png' alt='Publicacao'/>
+                    {
+                    
+                        userPosts.map( (post, key) =>{
+                            return(
+                                <img src={post.foto} alt='Post' key={key}/>
+                            )
+                        })
+                    }
                 </div>
             </div>
+            <FollowList 
+                pathname={pathName}
+                followtype={followType}
+                userauth={userAuth}
+            />
         </div>
     )
 }
