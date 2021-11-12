@@ -1,6 +1,6 @@
 .perfil-page-main-container{
     width: 100vw;
-    overflow-x: hidden;
+    overflow: hidden;
 }
  
 .perfil-container{
@@ -8,7 +8,7 @@
     top: 70px;
 
     width: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
 
     min-height: calc(100vh - 70px);
 
@@ -19,6 +19,8 @@
 
     background-color: #f5f5f5;
 }
+
+
 /* User Information */
 .perfil-container .perfil-info{
     display: flex;
@@ -108,14 +110,19 @@
     justify-content: space-between;
     align-content: center;
     flex-wrap: wrap;
+    
 
     padding-top: 20px;
     border-top: 2px solid rgba(0,0,0,0.2);
 }
 .perfil-container .perfil-publicacao img{
-    width: 25vw;
+    max-width: 25vw;
+    max-height: 25vw;
+
+    width: 300px;
+    height: 300px;
 
     object-fit: fill;
 
     margin: 10px;
-} 
+}  
