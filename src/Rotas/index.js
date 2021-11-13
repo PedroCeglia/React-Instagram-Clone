@@ -12,6 +12,7 @@ import Perfil from "../Pages/Perfil";
 import EditarPerfil from "../Pages/EditarPerfil";
 import Direct from "../Pages/Direct"
 import Explore from "../Pages/Explore"
+import UserFriend from "../Pages/UserFriend"
 
 
 
@@ -42,6 +43,7 @@ export default function Rotas(){
                 <Route exact path='/home/post' component={Post} />
                 <Route exact path='/home/direct' component={Direct} />
                 <Route exact path='/home/explore' component={Explore} />
+                <Route exact path='/home/userfriend' component={UserFriend}/>
             </Switch>
         </BrowserRouter>
     )
