@@ -24,6 +24,7 @@ export default function PostContent(props){
                         <ItemPost
                             key={key}
                             post={post}
+                            userauth={props.userauth}
                         />
                     )
                 })
