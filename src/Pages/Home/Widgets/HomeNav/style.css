@@ -44,14 +44,17 @@
 
     margin: 0 10px;
 }
+.your-date-home-container a,
 .your-date-home-container span{
     color: #1E88E5;
     cursor: pointer;
+    text-decoration: none;
+    border: none;
 }
 .your-date-home-container .your-date span{
     color: rgba(0,0,0,0.7);
 }
-
+ 
 
 /* Sugestao Container */
 .sugestoes-container{
