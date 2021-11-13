@@ -5,11 +5,13 @@ import './style.css'
 import StoryContent from './StoryContent'
 import PostContent from './PostContent'
 
-export default function HomeContent(){
+export default function HomeContent(props){
     return(
         <div className='home-content'>
             <StoryContent/>
-            <PostContent/>
+            <PostContent
+                userauth = {props.userauth}
+            />
         </div>
     )
 }

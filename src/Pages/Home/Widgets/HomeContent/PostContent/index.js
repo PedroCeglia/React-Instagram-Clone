@@ -1,15 +1,33 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './style.css'
+
+// Import Database Api
+import { getUserFeed } from "../../../../../Firebase/ApiDatabase";
 
 // Import Widgets
 import ItemPost from "./ItemPost";
 
-export default function PostContent(){
+export default function PostContent(props){
+    
+    // Get Feed List
+    const [feedList, setFeedList] = useState([])
+    useEffect(()=>{
+        if(props.userauth != null){
+            getUserFeed(props.userauth.uid, setFeedList)
+        }
+    },[props.userauth])
     return(
         <div className='post-container'>
-            <ItemPost/>
-            <ItemPost/>
-            <ItemPost/>
+            {
+                feedList.map((post, key) =>{
+                    return(
+                        <ItemPost
+                            key={key}
+                            post={post}
+                        />
+                    )
+                })
+            }
         </div>
     )
 }
