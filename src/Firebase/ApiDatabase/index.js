@@ -102,3 +102,20 @@ export function getUserFeed(id, setFeedList){
         }
     })
 }
+
+// Get Post Likes
+export function getLikesPost(postId, userId, setLikeButton, setListLike) {
+    onValue(ref(database, `curtidas/${postId}`), snapshot => {
+        let listaLike = []
+        if(snapshot.exists()){
+            snapshot.forEach(like => {
+                listaLike.push(like.val())
+                if(like.key === userId){
+                    setLikeButton('true')
+                }
+            })
+        }
+        setListLike(listaLike)
+    })
+}
+// Get Post Comment
