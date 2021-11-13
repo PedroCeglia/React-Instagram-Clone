@@ -73,4 +73,32 @@ export function getFollowList(id, followType, setFollowList) {
         }
     })
 }
-  
+
+// Get User List
+// The User Log Isn´t Include
+export function getUserList(id, setUserList){
+    onValue(ref(database, 'usuarios'), snapshot => {
+        let userList = []
+        if(snapshot.exists()){
+            snapshot.forEach( user => {
+                if(user.key !== id){
+                    userList.push(user.val())
+                }
+            })
+            setUserList(userList)
+        }
+    })
+}  
+
+// Get User Feed
+export function getUserFeed(id, setFeedList){
+    onValue(ref(database, `feed/${id}`), snapshot => {
+        let postList = []
+        if(snapshot.exists()){
+            snapshot.forEach(post => {
+                postList.push(post.val())
+            })
+            setFeedList(postList)
+        }
+    })
+}
