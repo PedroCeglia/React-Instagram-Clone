@@ -1,14 +1,19 @@
 import React, {useState, useEffect} from 'react'
 import './style.css'
 
+// Import React Router
+import { useHistory } from 'react-router'
+
 export default function ItemUser(props){
     
     // Set User Date
     const [userName, setUserName] = useState('')
+    const [userId, setUserId] = useState('')
     const [srcDiretory, setSrcDirectory] = useState('')
     useEffect(()=>{
         if(props.pathname != null){
             if(props.user != null){
+                if(props.user.id != null){setUserId(props.user.id)}else{setUserId('')}
                 if(props.user.nome != null){setUserName(props.user.nome)
                 }else{
                     setUserName('user_name')
@@ -42,6 +47,7 @@ export default function ItemUser(props){
             }
         } else{
             if(props.user != null){
+                if(props.user.id != null){setUserId(props.user.id)}else{setUserId('')}
                 if(props.user.nome != null){setUserName(props.user.nome)
                 }else{
                     setUserName('user_name')
@@ -55,10 +61,18 @@ export default function ItemUser(props){
             }
         }     
     },[props.pathname, props.user]) 
+     
+    // Open User Perfil
+    const history = useHistory()
+    function openUserFriendPage(){
+        history.push('/home/userfriend',{
+            id:{userId}
+        })
+    }
 
     return(
         <div className='user-item-list'>
-            <div className='user-dates'>
+            <div className='user-dates' onClick={openUserFriendPage}>
                 <img src={srcDiretory} alt='User Perfil'/>
                 <span>{userName}</span>
             </div>
