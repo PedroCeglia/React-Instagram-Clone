@@ -5,7 +5,7 @@ import './style.css'
 import { useHistory, useLocation } from 'react-router'
 
 // Import AuthApi
-import { VerifyListenerUserIsLog} from '../../Firebase/ApiAuth'
+import { getUserLog, VerifyListenerUserIsLog} from '../../Firebase/ApiAuth'
 
 // Import Widgets
 import Header from '../../Widgets/Header'
@@ -28,14 +28,20 @@ export default function Home(){
     // Set Image Resource
     const pathName = useLocation().pathname
 
+    const userAuth = getUserLog()
+
     return(
             <div className='container-home-main'>   
                 <Header
                     pathname={pathName}
                 />
                 <div className='container-home'>
-                    <HomeContent/>
-                    <HomeNav/>
+                    <HomeContent
+                        userauth = {userAuth}
+                    />
+                    <HomeNav
+                        userauth = {userAuth}
+                    />
                 </div>
             </div>
     )
