@@ -4,22 +4,33 @@ import './style.css'
 // Import React Router
 import { useHistory } from 'react-router'
 
+// Import DatabaseApi
+import { getUserLogDatabase } from '../../Firebase/ApiDatabase'
+
 export default function ItemUser(props){
-    
-    // Set User Date
+
+    // Get User
+    const [user, setUser] = useState()
+    useEffect(()=>{
+        if(props.user != null){
+            getUserLogDatabase(props.user.id, setUser)
+        }
+    },[props.user])
+
+    // Get User Date
     const [userName, setUserName] = useState('')
     const [userId, setUserId] = useState('')
     const [srcDiretory, setSrcDirectory] = useState('')
     useEffect(()=>{
         if(props.pathname != null){
-            if(props.user != null){
-                if(props.user.id != null){setUserId(props.user.id)}else{setUserId('')}
-                if(props.user.nome != null){setUserName(props.user.nome)
+            if(user != null){
+                if(user.id != null){setUserId(user.id)}else{setUserId('')}
+                if(user.nome != null){setUserName(user.nome)
                 }else{
                     setUserName('user_name')
                 }
-                if(props.user.foto != null){
-                    setSrcDirectory(props.user.foto)
+                if(user.foto != null){
+                    setSrcDirectory(user.foto)
                 } else{
                     const listSplit = props.pathname.split('/')
                     let x = 0
@@ -46,21 +57,21 @@ export default function ItemUser(props){
                 setUserName('user_name')                
             }
         } else{
-            if(props.user != null){
-                if(props.user.id != null){setUserId(props.user.id)}else{setUserId('')}
-                if(props.user.nome != null){setUserName(props.user.nome)
+            if(user != null){
+                if(user.id != null){setUserId(user.id)}else{setUserId('')}
+                if(user.nome != null){setUserName(user.nome)
                 }else{
                     setUserName('user_name')
                 }
-                if(props.user.foto != null){
-                    setSrcDirectory(props.user.foto)
+                if(user.foto != null){
+                    setSrcDirectory(user.foto)
                 } else{ setSrcDirectory('./assets/perfil.png')}
             } else{
                 setSrcDirectory('./assets/perfil.png')
                 setUserName('user_name')
             }
         }     
-    },[props.pathname, props.user]) 
+    },[props.pathname, user])
      
     // Open User Perfil
     const history = useHistory()
@@ -72,9 +83,9 @@ export default function ItemUser(props){
 
     return(
         <div className='user-item-list'>
-            <div className='user-dates' onClick={openUserFriendPage}>
+            <div className='user-dates' >
                 <img src={srcDiretory} alt='User Perfil'/>
-                <span>{userName}</span>
+                <span onClick={openUserFriendPage}>{userName}</span>
             </div>
         </div>
     )
