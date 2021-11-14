@@ -1,0 +1,33 @@
+.comments-date{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin: 5px;
+    padding: 10px;
+
+    border: 1px solid rgba(0,0,0,0.05);
+
+    width: 90%;
+}
+.comments-date img{
+    width: 30px;
+    height: 30px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+    align-self: flex-start;
+}
+.comments-date span{
+    color: rgba(0,0,0,0.7);
+    margin-left: 10px;
+    cursor: pointer;
+}
+.comments-date span:hover{
+    text-decoration: underline;
+    color: rgba(0,0,0,1);
+}
+.comments-date p{
+    margin: 10px 20px;
+}
