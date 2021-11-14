@@ -1,7 +1,7 @@
 // Import getDatabase
 import { database } from "../FirebaseConfig";
 // Import Database Functions
-import {set, ref, update, get, onValue} from '@firebase/database'
+import {set, ref, update, get, onValue, push, remove} from '@firebase/database'
 
 // Create User In Database
 export function createUserInDatabase(email, id){
@@ -107,9 +107,14 @@ export function getUserFeed(id, setFeedList){
 export function getLikesPost(postId, userId, setLikeButton, setListLike) {
     onValue(ref(database, `curtidas/${postId}`), snapshot => {
         let listaLike = []
+        setLikeButton('false')
         if(snapshot.exists()){
             snapshot.forEach(like => {
-                listaLike.push(like.val())
+                listaLike.push({
+                    nome:like.val().nomeUsuario,
+                    foto:like.val().fotoUsuario,
+                    id: like.key
+                })
                 if(like.key === userId){
                     setLikeButton('true')
                 }
@@ -118,4 +123,42 @@ export function getLikesPost(postId, userId, setLikeButton, setListLike) {
         setListLike(listaLike)
     })
 }
+  
+// Add Like In Post
+export function addLikeInPost(postId, userLog){
+    set(ref(database, `curtidas/${postId}/${userLog.uid}`), {
+        fotoUsuario:userLog.photoURL,
+        nomeUsuario:userLog.displayName
+    })
+}
+ 
+// Remove Like In Post
+export function removeLikeInPost(postId, userLog){
+    remove(ref(database, `curtidas/${postId}/${userLog.uid}`))
+}
+
 // Get Post Comment
+export function getCommentsPost(postId, setCommentsList){
+    onValue(ref(database, `comentarios/${postId}`), snapshot => {
+        let commentList = []
+        if(snapshot.exists()){
+            snapshot.forEach(comment => {
+                commentList.push(comment.val())
+            })
+        }
+        setCommentsList(commentList)
+    })
+}
+ 
+// Add Comment In Post
+export function addCommentInPost(postId, userLog, comment){
+    const newKey = push(ref(database, `comentarios/${postId}`)).key
+    set(ref(database, `comentarios/${postId}/${newKey}`),{
+        nomeUsuario:userLog.displayName,
+        fotoUsuario:userLog.photoURL,
+        idUsuario:userLog.uid,
+        comentario:comment,
+        idComentario:newKey,
+        idPostagem:postId
+    })
+}
