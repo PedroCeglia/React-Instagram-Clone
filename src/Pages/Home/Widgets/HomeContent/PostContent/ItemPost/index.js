@@ -2,7 +2,10 @@ import React,{useEffect, useState} from 'react'
 import './style.css'
 
 // Import DatabaseApi
-import { getLikesPost } from '../../../../../../Firebase/ApiDatabase'
+import { getLikesPost, getCommentsPost, removeLikeInPost, addLikeInPost, addCommentInPost } from '../../../../../../Firebase/ApiDatabase'
+
+// Import Widgets
+import FollowList from '../../../../../../Widgets/FollowList'
 
 export default function ItemPost(props){
 
@@ -39,10 +42,64 @@ export default function ItemPost(props){
         }
     },[props.post, props.userauth])
     useEffect(()=>{
-        if(userLiked === 'true'){setSrcLikeButton('assets/like-red.png')}else{setSrcLikeButton('assets/like.png')}
+        if(userLiked === 'true'){
+            setSrcLikeButton('assets/like-red.png')
+        }else{
+            setSrcLikeButton('assets/like.png')
+        }
     },[userLiked])
+    
+    // Add or Remove a Like
+    function addOrRemoveLike(){
+        if(props.userauth != null && props.post){
+            if(userLiked === "true"){
+                // Remove
+                removeLikeInPost(props.post.idPostagem, props.userauth)
+            } else{
+                // Add
+                addLikeInPost(props.post.idPostagem, props.userauth)
+            }            
+        }
+
+    }
+
+    // Close Likes List
+    function toggleLikesList(){
+        let likeList = document.querySelector('.post-like .container-follow-list')
+        likeList.classList.toggle('none')
+    }
 
     // Get Comment Post
+    const [commentList, setCommentList] = useState([])
+    useEffect(()=>{
+        if(props.post != null){
+            getCommentsPost(props.post.idPostagem, setCommentList)
+        }
+    },[props.post])
+
+    // Add Comments
+    const [inputComment, setInputComment] = useState('')
+    useEffect(()=>{
+        let btnSend = document.querySelector('.post-comentar span')
+        if(inputComment.length > 3){    
+            btnSend.classList.add('active')
+        } else{
+            btnSend.classList.remove('active')
+        }
+    })
+    function addComment() {
+        if(props.userauth != null && props.post && inputComment.length > 3){
+            addCommentInPost(props.post.idPostagem, props.userauth, inputComment)
+            setInputComment('')
+        }
+    }
+
+    // Toggle Comment List
+    function toggleCommentList(){
+        let commentList = document.querySelector('.post-comentarios .container-follow-list')
+        commentList.classList.toggle('none')
+    }
+
 
     return(
         <div className='post-item'>
@@ -58,24 +115,38 @@ export default function ItemPost(props){
             </div>
             <div className='post-icons'>
                 <div className='icons-left'>
-                    <img src={srcLikeButton} alt='Like Icon'/>
-                    <img src='assets/chat.png' alt='Chat Icon'/>                        
+                    <img src={srcLikeButton} alt='Like Icon' onClick={addOrRemoveLike}/>
+                    <label htmlFor='inputPostComment'><img src='assets/chat.png' alt='Chat Icon'/></label>                        
                     <img src='assets/send.png' alt='Send Icon'/>                        
                 </div>
                 <img src='assets/save-post.png' alt='Save Icon'/> 
             </div>
             <div className='post-like'>
-                <span>Curtido por: {listLike.length} pessoas</span>
+                <span onClick={toggleLikesList}>Curtidas <strong>{listLike.length}</strong></span>
+                <FollowList 
+                    userauth = {props.userauth}
+                    followtype = 'likes'
+                    likeslist = {listLike}
+                    classtoggle = '.post-like'
+                />
             </div>
             <div className='post-descricao'>   
                 <p><span className='user-name'>{userName}</span>{postDescription}</p>
             </div>
             <div className='post-comentarios'>
-                <span>Ver todos os 8 comentarios</span>
+                <span onClick={toggleCommentList}>Ver todos os {commentList.length} comentarios</span>
+                <FollowList
+                    userauth = {props.userauth}
+                    followtype = 'comment'
+                    commentlist = {commentList}
+                    classtoggle = '.post-comentarios'
+                />
             </div>
             <div className='post-comentar'>
-                <input type='text' placeholder='Digite um comentário ...'/>
-                <span>Publicar</span>
+                <input type='text' placeholder='Digite um comentário ...' id='inputPostComment'
+                        value={inputComment} onChange={text => setInputComment(text.target.value)}
+                />
+                <span onClick={addComment}>Publicar</span>
             </div>
         </div>
     )
