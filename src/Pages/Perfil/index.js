@@ -13,7 +13,7 @@ import { getUserLogDatabase, getUserPosts } from '../../Firebase/ApiDatabase'
 
 // Import Widgets 
 import Header from '../../Widgets/Header'
-import FollowList from './FollowList'
+import FollowList from '../../Widgets/FollowList'
 
 export default function Perfil(){
     
