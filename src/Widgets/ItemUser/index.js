@@ -77,7 +77,7 @@ export default function ItemUser(props){
     const history = useHistory()
     function openUserFriendPage(){
         history.push('/home/userfriend',{
-            id:{userId}
+            userId
         })
     }
 

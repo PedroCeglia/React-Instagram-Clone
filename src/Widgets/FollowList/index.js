@@ -51,16 +51,27 @@ export default function FollowList(props){
             }else if(props.followtype === 'seguidores'){
                 getFollowList(props.userauth.uid, 'seguidores', setListFollow)
                 setTypeList('Seguidores')
-            }else if(props.followtype === 'likes' && props.likeslist != null ){
-                setListFollow(props.likeslist)
-                setTypeList('Curtidas')
-            }else if(props.followtype === 'comment' && props.commentlist != null ) {
-                setListFollow(props.commentlist)
-                setTypeList('Comentarios')
-            }          
+            }      
         }
-    },[props.followtype, props.likeslist, props.commentlist, props.userauth])
-
+        if(props.userdatabase != null){
+            if(props.followtype === 'seguindo'){
+                getFollowList(props.userdatabase.id, 'seguindo', setListFollow)
+                setTypeList('Seguindo')
+            }else if(props.followtype === 'seguidores'){
+                getFollowList(props.userdatabase.id, 'seguidores', setListFollow)
+                setTypeList('Seguidores')
+            }
+        }
+        if(props.followtype === 'likes' && props.likeslist != null ){
+            setListFollow(props.likeslist)
+            setTypeList('Curtidas')
+        }
+        if(props.followtype === 'comment' && props.commentlist != null ) {
+            setListFollow(props.commentlist)
+            setTypeList('Comentarios')
+        }
+    },[props.followtype, props.likeslist, props.commentlist, props.userauth, props.userdatabase])
+ 
     return(
         <div className='container-follow-list none'>
             <div className='container-follow-list-arrond' onClick={closeFollowList}></div>
