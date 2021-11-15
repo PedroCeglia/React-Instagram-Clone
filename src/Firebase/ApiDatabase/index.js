@@ -110,11 +110,18 @@ export function getLikesPost(postId, userId, setLikeButton, setListLike) {
         setLikeButton('false')
         if(snapshot.exists()){
             snapshot.forEach(like => {
-                listaLike.push({
-                    nome:like.val().nomeUsuario,
-                    foto:like.val().fotoUsuario,
-                    id: like.key
-                })
+                if(like.val().fotoUsuario != null){
+                    listaLike.push({
+                        nome:like.val().nomeUsuario,
+                        foto:like.val().fotoUsuario,
+                        id: like.key
+                    })                    
+                }else{
+                    listaLike.push({
+                        nome:like.val().nomeUsuario,
+                        id:like.key
+                    })
+                }
                 if(like.key === userId){
                     setLikeButton('true')
                 }
@@ -126,10 +133,16 @@ export function getLikesPost(postId, userId, setLikeButton, setListLike) {
   
 // Add Like In Post
 export function addLikeInPost(postId, userLog){
-    set(ref(database, `curtidas/${postId}/${userLog.uid}`), {
-        fotoUsuario:userLog.photoURL,
-        nomeUsuario:userLog.displayName
-    })
+    if(userLog.photoURL != null){
+        set(ref(database, `curtidas/${postId}/${userLog.uid}`), {
+            fotoUsuario:userLog.photoURL,
+            nomeUsuario:userLog.displayName
+        })
+    } else{
+        set(ref(database, `curtidas/${postId}/${userLog.uid}`), {
+            nomeUsuario:userLog.displayName
+        })
+    }
 }
  
 // Remove Like In Post
@@ -153,12 +166,90 @@ export function getCommentsPost(postId, setCommentsList){
 // Add Comment In Post
 export function addCommentInPost(postId, userLog, comment){
     const newKey = push(ref(database, `comentarios/${postId}`)).key
-    set(ref(database, `comentarios/${postId}/${newKey}`),{
-        nomeUsuario:userLog.displayName,
-        fotoUsuario:userLog.photoURL,
-        idUsuario:userLog.uid,
-        comentario:comment,
-        idComentario:newKey,
-        idPostagem:postId
+    if(userLog.photoURL != null){
+        set(ref(database, `comentarios/${postId}/${newKey}`),{
+            nomeUsuario:userLog.displayName,
+            fotoUsuario:userLog.photoURL,
+            idUsuario:userLog.uid,
+            comentario:comment,
+            idComentario:newKey,
+            idPostagem:postId
+        })        
+    } else{
+        set(ref(database, `comentarios/${postId}/${newKey}`),{
+            nomeUsuario:userLog.displayName,
+            idUsuario:userLog.uid,
+            comentario:comment,
+            idComentario:newKey,
+            idPostagem:postId
+        })          
+    }
+
+}
+
+// ADD Follow
+export function addFollow(userAuth, userFriend){
+    if(userAuth.foto != null){
+        set(ref(database, `seguidores/${userFriend.id}/${userAuth.ud}`),{
+            foto:userAuth.foto,
+            id:userAuth.id,
+            nome:userAuth.nome
+        })        
+    } else{
+        set(ref(database, `seguidores/${userFriend.id}/${userAuth.ud}`),{
+            id:userAuth.id,
+            nome:userAuth.nome
+        })   
+    }
+    if(userFriend.foto != null){
+        set(ref(database, `seguindo/${userAuth.id}/${userFriend.id}`),{
+            foto:userFriend.foto,
+            id:userFriend.id,
+            nome:userFriend.nome
+        })        
+    } else{
+        set(ref(database, `seguindo/${userAuth.id}/${userFriend.id}`),{
+            id:userFriend.id,
+            nome:userFriend.nome
+        }) 
+    }
+    update(ref(database, `usuarios/${userFriend.id}`),{
+        seguidores:userFriend.seguidores + 1
+    })
+    update(ref(database, `usuarios/${userAuth.id}`),{
+        seguindo:userAuth.seguindo + 1
+    })
+}
+
+// Remove Follow
+export function removeFollow(userAuth, userFriend){
+    remove(ref(database, `seguindo/${userAuth.id}/${userFriend.id}`))
+    remove(ref(database, `seguidores/${userFriend.id}/${userAuth.id}`))
+    update(ref(database, `usuarios/${userFriend.id}`),{
+        seguidores:userFriend.seguidores - 1
+    })
+    update(ref(database, `usuarios/${userAuth.id}`),{
+        seguindo:userAuth.seguindo - 1
+    })
+}
+
+// Verify if user is Follow
+export function verifyIfIsFollow(userAuth, userFriend, setVerifyIfIsFollow){
+    get(ref(database,`seguindo/${userAuth.id}/${userFriend.id}`))
+        .then(snapshot => {
+            if(snapshot.exists()){
+                setVerifyIfIsFollow('true')
+            }else{
+                setVerifyIfIsFollow('false')
+            }
+        })
+}
+
+// Get User By Id
+export function getUserById(userId, setUser){
+    onValue(ref(database, `usuarios/${userId}`), snapshot => {
+        if(snapshot.exists()){
+            setUser(snapshot.val())
+        }
     })
 }
