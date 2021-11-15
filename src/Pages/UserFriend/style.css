@@ -3,3 +3,17 @@
     height: 100vh;
     background-color: rgba(0,0,0,0.6);
 }
+
+.user-friend-container button.btn-seguir {
+    width: 300px;
+    margin: auto;
+    padding: 10px 0;
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+.user-friend-container button.btn-seguir:hover {
+    transition: 1s all;
+    box-shadow: 0 0 5px rgba(0,0,0,0.4);
+}
