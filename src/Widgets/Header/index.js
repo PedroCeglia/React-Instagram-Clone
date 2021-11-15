@@ -15,15 +15,7 @@ export default function Header(props){
     // Get User
     const user = getUserLog()
 
-    // Set User Foto
-    const [srcUserFoto, setSrcUserFoto] = useState('assets/perfil.png')
-    useEffect(()=>{
-        if(user != null){
-            if(user.photoURL !== null){
-                setSrcUserFoto(user.photoURL)
-            }
-        }
-    },[user])
+
 
     // Set Image Diretory
     const [srcDiretory, setSrcDirectory] = useState('')
@@ -41,6 +33,18 @@ export default function Header(props){
         }   
     },[props.pathname])
 
+    // Set User Foto
+    const [srcUserFoto, setSrcUserFoto] = useState('assets/perfil.png')
+    useEffect(()=>{
+        if(user != null){
+            if(user.photoURL !== null){
+                setSrcUserFoto(user.photoURL)
+            } else{
+                setSrcUserFoto(srcDiretory + 'assets/perfil.png')
+            }
+        }
+    },[user, srcDiretory])
+    
     function toggleNotify() {
         const notifyContainer = document.querySelector('.header-notify-container')
         const notifyContent = document.querySelector('.header-notify-content')
