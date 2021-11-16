@@ -252,4 +252,36 @@ export function getUserById(userId, setUser){
             setUser(snapshot.val())
         }
     })
+}  
+
+// ADD Post And Feed
+export function addPostAndFeedDatabase(id, url, descricao, followList){
+    const postKey = push(ref(database, `postagens/${id}`)).key
+    set(ref(database,`postagens/${id}/${postKey}`),{
+        idUsuario:id,
+        idPostagem:postKey,
+        foto:url,
+        descricao:descricao
+    })
+    followList.forEach(user =>{
+        if(user.foto != null){
+            set(ref(database,`feed/${user.id}/${postKey}`),{
+                idUsuario:id,
+                idPostagem:postKey,
+                fotoPostagem:url,
+                fotoUsuario:user.foto,
+                nomeUsuario:user.nome,
+                descricao:descricao
+            })
+        } else{
+            set(ref(database,`feed/${user.id}/${postKey}`),{
+                idUsuario:id,
+                idPostagem:postKey,
+                fotoPostagem:url,
+                nomeUsuario:user.nome,
+                descricao:descricao
+            })
+        }
+
+    })
 }
