@@ -285,3 +285,25 @@ export function addPostAndFeedDatabase(id, url, descricao, followList){
 
     })
 }
+
+// Get Post By Id
+export function getPostById(idUser, idPost, setPost){
+    get(ref(database, `postagens/${idUser}/${idPost}`)).then(snapshot =>{
+        if(snapshot.exists()){
+            setPost(snapshot.val())
+        }
+    })
+}
+
+// Get Likes By Id
+export function getOnlyLikesById(idPost, setLikeList){
+    onValue(ref(database, `curtidas/${idPost}`), snapshot => {
+        let listLike = []
+        if(snapshot.exists()){
+            snapshot.forEach(like => {
+                listLike.push(like.val())
+            })
+        }
+        setLikeList(listLike)
+    })
+}
