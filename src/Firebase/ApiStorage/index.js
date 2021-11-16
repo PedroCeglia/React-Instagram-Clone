@@ -29,8 +29,9 @@ export function setUserPerfilFoto(image, id, setSrcImage){
 }
 
 // Add Post
-export function addPostInStorageAndDatabase(image, descricao, id, addPostAndFeed, listFollowUser){
-    const uploadTask = storage.ref().child(`imagens/postagens/${id}/${uuidv4()}`).put(image)
+export function addPostInStorage(image, id, setPostIdStorage, setUrlDownload){
+    const uidPost = uuidv4()
+    const uploadTask = storage.ref().child(`imagens/postagens/${id}/${uidPost}`).put(image)
     uploadTask.on(storageEvent,
         snapshot =>{
             // Funções de Ciclo de Vida
@@ -42,9 +43,16 @@ export function addPostInStorageAndDatabase(image, descricao, id, addPostAndFeed
         ()=>{
             // Upload completed successfully, now we can get the download URL
             uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                addPostAndFeed(id, descricao, downloadURL, listFollowUser)
+                setPostIdStorage(uidPost)
+                setUrlDownload(downloadURL)
             })
         }
     )
+}
+
+// Delete Post
+export function deletePostInStorage(id, uidPost){
+    const postRef = storage.ref().child(`imagens/postagens/${id}/${uidPost}`)
+    postRef.delete()
 }
 
