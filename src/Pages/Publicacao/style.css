@@ -1,0 +1,159 @@
+/* Publicação Conteiner */
+.publicacao-container{
+    width: 100vw;
+    min-height: 100vh;
+    max-height: 100vh;
+
+    overflow: hidden;
+
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0,0,0,0.4);
+
+}
+.publicacao-container img.close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    width: 30px;
+    height: 30px;
+
+    cursor: pointer;
+}
+
+/* Publicação Content */
+.publicacao-container .publicacao-content{
+    
+    width: 80vw;
+    height: 80vh;
+
+    background-color: rgba(255,255,255,0.9);
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+.publicacao-container .publicacao-content img.post{
+    width: calc( 100% - 20px);
+    height: calc(100% - 20px);
+
+    border-radius: 5px;
+
+    margin: 10px;
+}
+
+/* Publicação Dates */
+.publicacao-container .publicacao-content .publicacao-dates-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: calc( 100% - 20px);
+    height: calc( 100% - 20px);
+    margin: 10px;
+}
+
+/* Publicação User Dates */
+.publicacao-container .publicacao-content .publicacao-dates-container .publicacao-user-dates{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+.publicacao-container .publicacao-content .publicacao-dates-container .publicacao-user-dates img{
+    width: 40px;
+    height: 40px;
+
+    margin-right: 20px;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+.publicacao-container .publicacao-content .publicacao-dates-container .publicacao-user-dates span{
+    color: rgba(0,0,0,0.8);
+    font-size: 1.1em;
+}
+
+/* Publicação Comment */ 
+.publicacao-container .publicacao-content .publicacao-comment-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    border-top: 1px solid rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+
+    overflow-y: auto;
+
+    margin: 20px 0;
+
+    height: 60%;
+
+    width: 100%;
+}
+
+/* Publicação Icons Area*/
+.publicacao-container .publicacao-content .publicacao-icons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+.publicacao-container .publicacao-content .publicacao-icons label{
+    width: 30px;
+    height: 30px;
+    margin:  0 10px;
+}
+.publicacao-container .publicacao-content .publicacao-icons img{
+    width: 30px;
+    height: 30px;
+}
+.publicacao-container .publicacao-content .publicacao-icons .publicacao-icons-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Publicação Like Area */
+.publicacao-container .publicacao-content .publicacao-like-area{
+    margin: 20px 0;
+}
+.publicacao-container .publicacao-content .publicacao-like-area span{
+    color: rgba(0,0,0,0.8);
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+/* Publicação Input Area */
+.publicacao-container .publicacao-content .publicacao-input-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.2);
+    width: 95%;
+}
+.publicacao-container .publicacao-content .publicacao-input-area input{
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+.publicacao-container .publicacao-content .publicacao-input-area button{
+    border: none;
+    background-color: transparent;
+    color: rgb(6, 173, 250);
+    font-size: 1.1em;
+    cursor: pointer;
+} 
