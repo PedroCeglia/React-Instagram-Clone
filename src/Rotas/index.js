@@ -13,6 +13,7 @@ import EditarPerfil from "../Pages/EditarPerfil";
 import Direct from "../Pages/Direct"
 import Explore from "../Pages/Explore"
 import UserFriend from "../Pages/UserFriend"
+import Publicacao from "../Pages/Publicacao";
 
 
 
@@ -44,6 +45,7 @@ export default function Rotas(){
                 <Route exact path='/home/direct' component={Direct} />
                 <Route exact path='/home/explore' component={Explore} />
                 <Route exact path='/home/userfriend' component={UserFriend}/>
+                <Route exact path='/home/publicacao' component={Publicacao}/>
             </Switch>
         </BrowserRouter>
     )
