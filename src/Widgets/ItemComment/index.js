@@ -5,7 +5,7 @@ import './style.css'
 import { useHistory } from 'react-router'
 
 // Import DatabaseApi
-import { getUserLogDatabase } from '../../Firebase/ApiDatabase'
+import { getUserById } from '../../Firebase/ApiDatabase'
 
 export default function ItemComment(props){
 
@@ -14,9 +14,9 @@ export default function ItemComment(props){
     const [user, setUser] = useState()
     useEffect(()=>{
         if(props.user != null){
-            getUserLogDatabase(props.user.id, setUser)
+            getUserById(props.user.id, setUser)
         }
-    },[props.user])
+    },[props.user]) 
 
     // Get User Date
     const [userName, setUserName] = useState('')
