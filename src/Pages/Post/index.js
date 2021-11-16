@@ -50,7 +50,7 @@ export default function Post(){
     },[userAuth])
 
     // Post Foto
-    const [postFoto, setPostFoto] = useState('')
+    const [postFoto, setPostFoto] = useState()
     const [idPostStorage, setIdPostStorage] = useState('')
     const [postUrl, setPostUrl] = useState('../assets/perfil.png')
     useEffect(()=>{
