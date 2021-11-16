@@ -29,6 +29,9 @@
 
     transition: all 1s;
 }
+.post-page-container .post-content.none{
+    display: none;
+}
 .post-page-container .post-content:hover{
     transition: all 1s;
     transform: scale(1.1);
@@ -50,4 +53,155 @@
 
     cursor: pointer;
     
+}
+
+/* Post Conteiner Edit Post */ 
+.post-page-container .edit-post-container{
+    width: 50vw;
+    height: calc(50vh);
+
+    z-index: 12;
+
+    background-color: rgba(255,255,255,0.95);
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    border-radius: 20px;
+    box-shadow: 0 0 2px rgba(255,255,255,0.5);
+
+    transition: all 1s;
+}
+.post-page-container .edit-post-container.none{
+    display: none;
+}
+.post-page-container .edit-post-container img.post-image{
+    height: calc(100% - 20px);
+    width: calc(25vw - 20px);
+    margin: 10px;
+    border-radius: 5px;
+}
+
+/* Post Conteiner Edit Post Content */
+.post-page-container .edit-post-container .edit-post-content{
+    height: calc(100% - 20px);
+    width: calc(25vw - 20px);
+    margin: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+.post-page-container .edit-post-container .edit-post-content img.close{
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+    margin-right: 10px;
+    align-self: flex-end;
+    cursor: pointer;
+}
+.post-page-container .edit-post-container .edit-post-content textarea{
+    min-width: 100%;
+    max-width: 100%;
+    max-height: 60%;
+    min-height: 30%;
+    margin-top: 20px;
+
+    outline: none;
+    padding: 10px 20px;
+    border: 2px solid rgba(0,0,0,0.1) 
+}
+.post-page-container .edit-post-container .edit-post-content button{
+    border: none;
+    width: 50%;
+    min-width: 100px;
+    background-color: transparent;
+    color: rgb(6, 173, 250);
+    font-size: 1.15em;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px;
+    align-self: flex-end;
+}
+
+
+/* Post Conteiner Edit Post Content  User Dates*/
+.post-page-container .edit-post-container .edit-post-content .user-dates{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    width: 100%;
+}
+.post-page-container .edit-post-container .edit-post-content .user-dates img{
+    width: 40px;
+    height: 40px;
+    margin: 5px 10px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.post-page-container .edit-post-container .edit-post-content .user-dates span{
+    color: rgba(0,0,0,0.8);
+    font-size: 1.1em;
+}
+
+/* Post Conteiner Edit Post Alert Container */
+.post-page-container .edit-post-alert-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.8);
+} 
+.post-page-container .edit-post-alert-container.none{
+    display: none;
+}
+
+/* Post Conteiner Edit Post Alert Content */
+.post-page-container .edit-post-alert-content{
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgba(255,255,255,1);
+    border: 2px solid rgba(0,0,0,0.1);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 12;
+}
+.post-page-container .edit-post-alert-content.none{
+    display: none;
+}
+.post-page-container .edit-post-alert-content h4{
+    margin: 5px 20px ;
+    font-size: 1.1em;
+    
+}
+.post-page-container .edit-post-alert-content span{
+    margin: 0 20px 10px;
+    color: rgba(0,0,0,0.8);
+}
+.post-page-container .edit-post-alert-content button{
+    padding: 10px 20px;
+    margin: 10px 0;
+    width: 100%;
+    font-size: 1.2em;
+
+    background-color: transparent;
+    border: 2px solid rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+.post-page-container .edit-post-alert-content button.descart{
+    margin: 20px 0 0px;
+    color: rgb(243, 36, 36);
+
 }
