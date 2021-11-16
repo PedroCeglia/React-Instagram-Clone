@@ -14,6 +14,7 @@ import { getUserLogDatabase, getUserPosts } from '../../Firebase/ApiDatabase'
 // Import Widgets 
 import Header from '../../Widgets/Header'
 import FollowList from '../../Widgets/FollowList'
+import ItemPostPage from '../../Widgets/ItemPostPage'
 
 export default function Perfil(){
     
@@ -99,10 +100,9 @@ export default function Perfil(){
                 </div>
                 <div className='perfil-publicacao'>
                     {
-                    
                         userPosts.map( (post, key) =>{
                             return(
-                                <img src={post.foto} alt='Post' key={key}/>
+                                <ItemPostPage idPost={post.idPostagem} pathname={pathName} midiaPost={post.foto} idUser={post.idUsuario} key={key}/>
                             )
                         })
                     }
