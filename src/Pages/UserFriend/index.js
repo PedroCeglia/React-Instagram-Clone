@@ -74,7 +74,7 @@ export default function UserFriend(){
     }
   },[userAuthLog])
 
-  // Verify if UserFriend And UserAuthLog Is the some
+  // Verify if UserFriend And UserAuthLog Is the same
   const history = useHistory()
   useEffect(()=>{
     if(userAuthLog != null && user != null){
