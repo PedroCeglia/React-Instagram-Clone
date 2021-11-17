@@ -1,29 +1,46 @@
 .header-notify-content .header-notify-list .item-notify-container{
-    margin: 10px;
-    padding-bottom: 10px;
+    margin: 5px;
+    padding: 10px;
 
     width: calc( 100% - 20px);
 
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 
     border-bottom: 1px solid rgba(0,0,0,0.05);
 
     cursor: pointer;
 }
-.header-notify-content .header-notify-list .item-notify-container img{
+.header-notify-content .header-notify-list .item-notify-container:hover{
+    background-color: rgba(0,0,0,0.2);
+}
+.header-notify-content .header-notify-list .item-notify-container div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+.header-notify-content .header-notify-list .item-notify-container img.perfil{
     width: 40px;
     height: 40px;
 
     border-radius: 50%;
     object-fit: cover;
 }
+.header-notify-content .header-notify-list .item-notify-container img.post{
+    width: 60px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+
+    margin-left: 20px;
+}
 .header-notify-content .header-notify-list .item-notify-container .user-name{
     font-size: 1.2em;
     margin: 0 10px;
 }
 .header-notify-content .header-notify-list .item-notify-container .user-action{
-    color: rgba(0,0,0,0.5);
+    color: rgba(0,0,0,0.8);
 } 
  
