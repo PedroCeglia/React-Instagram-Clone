@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import './style.css'
 
 // Import React Router
-import { useLocation } from 'react-router'
+import { useLocation, useHistory } from 'react-router'
 
 // Import DatabaseApi
 import { getUserById, getUserPosts, verifyIfIsFollow, addFollow, removeFollow} from '../../Firebase/ApiDatabase'
@@ -13,7 +13,6 @@ import { getUserLog } from '../../Firebase/ApiAuth'
 // Import Widgets
 import Header from '../../Widgets/Header'
 import FollowList from '../../Widgets/FollowList'
-import { set } from '@firebase/database'
 
 export default function UserFriend(){
   
@@ -74,6 +73,16 @@ export default function UserFriend(){
       getUserById(userAuthLog.uid, setUserAuth)
     }
   },[userAuthLog])
+
+  // Verify if UserFriend And UserAuthLog Is the some
+  const history = useHistory()
+  useEffect(()=>{
+    if(userAuthLog != null && user != null){
+      if(userAuthLog.uid === user.id){
+        history.push('/home/perfil')
+      }
+    }
+  },[userAuthLog, user])
 
   // Verify if User Is Follow
   const [verifyIsFollow, setVerifyIsFollow] = useState('')
