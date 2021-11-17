@@ -132,17 +132,45 @@ export function getLikesPost(postId, userId, setLikeButton, setListLike) {
 }
   
 // Add Like In Post
-export function addLikeInPost(postId, userLog){
+export function addLikeInPost(post, userLog){
     if(userLog.photoURL != null){
-        set(ref(database, `curtidas/${postId}/${userLog.uid}`), {
+        set(ref(database, `curtidas/${post.idPostagem}/${userLog.uid}`), {
             fotoUsuario:userLog.photoURL,
             nomeUsuario:userLog.displayName
         })
     } else{
-        set(ref(database, `curtidas/${postId}/${userLog.uid}`), {
+        set(ref(database, `curtidas/${post.idPostagem}/${userLog.uid}`), {
             nomeUsuario:userLog.displayName
         })
     }
+
+    // Change post
+    let newPost
+    if(post.foto == null){
+        newPost = {
+            idPostagem:post.idPostagem,
+            idUsuario:post.idUsuario,
+            foto:post.fotoPostagem
+        }
+    } else{
+        newPost = post
+    }
+
+    // Change user Log // Verify if has Foto
+    let newUserLog
+
+    if (userLog.photoURL != null){
+        newUserLog = { nome:userLog.displayName, id:userLog.uid, foto:userLog.photoURL} 
+    }else{
+        newUserLog = { nome:userLog.displayName, id:userLog.uid}
+    }
+
+    // Get A IdKey
+    const likeKey = push(ref(database, `notify/${post.idUsuario}`)).key
+
+    // Add Notify
+    addNotifyInDatabse(post.idUsuario, likeKey, newUserLog, newPost, null, 'like')
+
 }
  
 // Remove Like In Post
@@ -164,31 +192,59 @@ export function getCommentsPost(postId, setCommentsList){
 }
  
 // Add Comment In Post
-export function addCommentInPost(postId, userLog, comment){
-    const newKey = push(ref(database, `comentarios/${postId}`)).key
+export function addCommentInPost(post, userLog, comment){
+    const newKey = push(ref(database, `comentarios/${post.idPostagem}`)).key
+
+    // Change post
+    let newPost
+    if(post.foto == null){
+        newPost = {
+            idPostagem:post.idPostagem,
+            idUsuario:post.idUsuario,
+            foto:post.fotoPostagem
+        }
+    } else{
+        newPost = post
+    }
+
+    // Add Comment Tref In Database
     if(userLog.photoURL != null){
-        set(ref(database, `comentarios/${postId}/${newKey}`),{
+        set(ref(database, `comentarios/${newPost.idPostagem}/${newKey}`),{
             nomeUsuario:userLog.displayName,
             fotoUsuario:userLog.photoURL,
             idUsuario:userLog.uid,
             comentario:comment,
             idComentario:newKey,
-            idPostagem:postId
+            idPostagem:newPost.idPostagem
         })        
     } else{
-        set(ref(database, `comentarios/${postId}/${newKey}`),{
+        set(ref(database, `comentarios/${newPost.idPostagem}/${newKey}`),{
             nomeUsuario:userLog.displayName,
             idUsuario:userLog.uid,
             comentario:comment,
             idComentario:newKey,
-            idPostagem:postId
+            idPostagem:newPost.idPostagem
         })          
     }
+
+    // Change user Log // Verify if has Foto
+    let newUserLog
+
+    if (userLog.photoURL != null){
+        newUserLog = { nome:userLog.displayName, id:userLog.uid, foto:userLog.photoURL} 
+    }else{
+        newUserLog = { nome:userLog.displayName, id:userLog.uid}
+    }
+
+
+    // Add NotifyRef In Database
+    addNotifyInDatabse(newPost.idUsuario, newKey, newUserLog, newPost, comment, 'comment')
 
 }
 
 // ADD Follow
 export function addFollow(userAuth, userFriend){
+    // Add Follow Reference In Database
     if(userAuth.foto != null){
         set(ref(database, `seguidores/${userFriend.id}/${userAuth.ud}`),{
             foto:userAuth.foto,
@@ -213,12 +269,17 @@ export function addFollow(userAuth, userFriend){
             nome:userFriend.nome
         }) 
     }
+    
+    // Update Follows Number
     update(ref(database, `usuarios/${userFriend.id}`),{
         seguidores:userFriend.seguidores + 1
     })
     update(ref(database, `usuarios/${userAuth.id}`),{
         seguindo:userAuth.seguindo + 1
     })
+
+    // Add Notify
+    addNotifyInDatabse(userFriend.id, userAuth.id, userAuth, null, null, 'follow')
 }
 
 // Remove Follow
@@ -307,3 +368,46 @@ export function getOnlyLikesById(idPost, setLikeList){
         setLikeList(listLike)
     })
 }
+
+// Add Notify
+export function addNotifyInDatabse(id, idNotify, userFriend ,post, comment, type){
+    // Get Database Reference
+    const notifyRef = ref(database, `notify/${id}/${idNotify}`)
+
+    // Get TimeStamp
+    const time = new Date().getTime()
+    
+    if(type === 'follow'){
+        set(notifyRef, {
+            id:userFriend.id,
+            nome:userFriend.nome,
+            time:time,
+            type:type
+        })
+    } else if(type === 'comment' && post != null && comment != null){
+        set(notifyRef, {
+            id:userFriend.id,
+            nome:userFriend.nome,
+            time:time,
+            idPost:post.idPostagem,
+            idFoto:post.foto,
+            comment:comment,
+            type:type
+        })
+    } else if(type === 'like' && post != null){
+        set(notifyRef, {
+            id:userFriend.id,
+            nome:userFriend.nome,
+            time:time,
+            idPost:post.idPostagem,
+            idFoto:post.foto,
+            type:type
+        })
+    }
+    // Add User Foto
+    if(userFriend.foto != null){
+        update(notifyRef,{
+            foto:userFriend.foto
+        })
+    }
+} 
