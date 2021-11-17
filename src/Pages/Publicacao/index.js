@@ -8,7 +8,7 @@ import { useHistory, useLocation } from 'react-router'
 import { getUserLog, VerifyListenerUserIsLog } from '../../Firebase/ApiAuth'
 
 // Import DatabaseApi
-import { addCommentInPost, getCommentsPost, getLikesPost, getPostById, getUserById } from '../../Firebase/ApiDatabase'
+import { addCommentInPost, addLikeInPost, getCommentsPost, getLikesPost, getPostById, getUserById, removeLikeInPost } from '../../Firebase/ApiDatabase'
 
 // Import Widget
 import ItemComment from '../../Widgets/ItemComment'
@@ -53,6 +53,10 @@ export default function Publicacao(){
             setPostMidia('../assets/perfil.png')
         }
     },[post])
+
+
+    // Get User Auth
+    const userAuth = getUserLog()
 
 
     // Get User
@@ -118,16 +122,24 @@ export default function Publicacao(){
         likeList.classList.toggle('none')
     }
 
+    // Like Post
+    function likeAndDislikePost(){
+        if(userAuth != null && post != null){
+            if(isLike === 'true'){
+                removeLikeInPost(post.idPostagem, userAuth)
+            } else{
+                addLikeInPost(post, userAuth)
+            }            
+        }
+    }
 
-    // Get User Auth
-    const userAuth = getUserLog()
 
     // Add New Comment
     const [newComment, setNewComment] = useState('')
     function addNewComment(){
         if(stateLocation != null){
-            if(stateLocation.idPost != null && userAuth != null && newComment.length > 2){
-                addCommentInPost(stateLocation.idPost, userAuth, newComment)
+            if(post != null && userAuth != null && user != null && newComment.length > 3){
+                addCommentInPost(post, userAuth, newComment)
                 setNewComment('')
             }
         }
@@ -167,7 +179,7 @@ export default function Publicacao(){
                     </div>
                     <div className='publicacao-icons'>
                         <div className='publicacao-icons-left'>
-                            <img src={srcLikeButton} alt='Like Icon'/>
+                            <img src={srcLikeButton} alt='Like Icon' onClick={likeAndDislikePost}/>
                             <label htmlFor='inputPublicComment'><img src='../assets/chat.png' alt='Chat Icon'/></label>                        
                             <img src='../assets/send.png' alt='Send Icon'/>                        
                         </div>

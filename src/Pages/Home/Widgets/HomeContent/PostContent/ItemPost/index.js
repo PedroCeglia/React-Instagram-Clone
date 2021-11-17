@@ -57,7 +57,7 @@ export default function ItemPost(props){
                 removeLikeInPost(props.post.idPostagem, props.userauth)
             } else{
                 // Add
-                addLikeInPost(props.post.idPostagem, props.userauth)
+                addLikeInPost(props.post, props.userauth)
             }            
         }
 
@@ -88,11 +88,11 @@ export default function ItemPost(props){
         }
     })
     function addComment() {
-        if(props.userauth != null && props.post && inputComment.length > 3){
-            addCommentInPost(props.post.idPostagem, props.userauth, inputComment)
+        if(props.userauth != null && props.post != null && inputComment.length > 3){
+            addCommentInPost(props.post, props.userauth, inputComment)
             setInputComment('')
         }
-    }
+    }  
 
     // Toggle Comment List
     function toggleCommentList(){
