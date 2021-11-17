@@ -126,7 +126,7 @@ export default function Publicacao(){
     function likeAndDislikePost(){
         if(userAuth != null && post != null){
             if(isLike === 'true'){
-                removeLikeInPost(post.idPostagem, userAuth)
+                removeLikeInPost(post, userAuth)
             } else{
                 addLikeInPost(post, userAuth)
             }            

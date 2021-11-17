@@ -54,7 +54,7 @@ export default function ItemPost(props){
         if(props.userauth != null && props.post){
             if(userLiked === "true"){
                 // Remove
-                removeLikeInPost(props.post.idPostagem, props.userauth)
+                removeLikeInPost(props.post, props.userauth)
             } else{
                 // Add
                 addLikeInPost(props.post, props.userauth)
