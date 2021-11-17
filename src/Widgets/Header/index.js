@@ -15,8 +15,6 @@ export default function Header(props){
     // Get User
     const user = getUserLog()
 
-
-
     // Set Image Diretory
     const [srcDiretory, setSrcDirectory] = useState('')
     useEffect(()=>{
@@ -89,6 +87,7 @@ export default function Header(props){
             </div>
             <Notify
                 srcDiretory = {srcDiretory}
+                user = {user}
             />
         </div>
     )
