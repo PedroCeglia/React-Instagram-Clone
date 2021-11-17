@@ -165,18 +165,20 @@ export function addLikeInPost(post, userLog){
         newUserLog = { nome:userLog.displayName, id:userLog.uid}
     }
 
-    // Get A IdKey
-    const likeKey = push(ref(database, `notify/${post.idUsuario}`)).key
-
-    // Add Notify
-    addNotifyInDatabse(post.idUsuario, likeKey, newUserLog, newPost, null, 'like')
+    if(newPost.idUsuario !== newUserLog.id){
+        // Add Notify
+        addNotifyInDatabse(post.idUsuario, newPost.idPostagem, newUserLog, newPost, null, 'like')
+    }
 
 }
  
 // Remove Like In Post
-export function removeLikeInPost(postId, userLog){
-    remove(ref(database, `curtidas/${postId}/${userLog.uid}`))
-}
+export function removeLikeInPost(post, userLog){
+    remove(ref(database, `curtidas/${post.idPostagem}/${userLog.uid}`))
+    if(post.idUsuario !== userLog.uid){
+        remove(ref(database, `notify/${post.idUsuario}/${post.idPostagem}`))
+    }
+} 
 
 // Get Post Comment
 export function getCommentsPost(postId, setCommentsList){
@@ -237,9 +239,10 @@ export function addCommentInPost(post, userLog, comment){
     }
 
 
-    // Add NotifyRef In Database
-    addNotifyInDatabse(newPost.idUsuario, newKey, newUserLog, newPost, comment, 'comment')
-
+    if(newPost.idUsuario !== newUserLog.id){
+        // Add NotifyRef In Database
+        addNotifyInDatabse(newPost.idUsuario, newKey, newUserLog, newPost, comment, 'comment')
+    }
 }
 
 // ADD Follow
@@ -370,7 +373,7 @@ export function getOnlyLikesById(idPost, setLikeList){
 }
 
 // Add Notify
-export function addNotifyInDatabse(id, idNotify, userFriend ,post, comment, type){
+function addNotifyInDatabse(id, idNotify, userFriend ,post, comment, type){
     // Get Database Reference
     const notifyRef = ref(database, `notify/${id}/${idNotify}`)
 
@@ -411,3 +414,16 @@ export function addNotifyInDatabse(id, idNotify, userFriend ,post, comment, type
         })
     }
 } 
+
+// Get User Notify
+export function getUserNotify(id, setNotifyList){
+    onValue(ref(database ,`notify/${id}`), snapshot => {
+        let notifyList = []
+        if(snapshot.exists()){
+            snapshot.forEach(notify => {
+                notifyList.push(notify.val())
+            })
+        }
+        setNotifyList(notifyList)
+    })
+}
