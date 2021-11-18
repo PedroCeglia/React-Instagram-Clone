@@ -57,7 +57,10 @@ export default function Direct(){
                     user={user}
                     setChatById={setChatId}
                 />
-                <DirectContent/>
+                <DirectContent
+                    user={user}
+                    userFriendId={chatId}
+                />
             </div>
         </div>
     )
