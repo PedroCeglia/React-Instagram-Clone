@@ -1,3 +1,42 @@
+# React Instagram Clone
+
+## Intro :
+
+Essa Aplicação é um clone do site do Instagram ( This Apllication is Instagram WebSite Clone )
+
+Criada apenas para acrescentar ao portifólio   ( Create only to add in portfolio)
+<br>
+<br>
+<br>
+<br>
+<br>
+## Stacks :
+
+### `Front-End`
+####           Html
+
+####           CSS
+
+####           JavaScript
+
+####           React
+
+<hr>
+
+### `Back-End`
+
+####           JavaScript
+
+####           Firebase
+
+<hr>
+<hr>
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
