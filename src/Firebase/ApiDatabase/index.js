@@ -429,15 +429,28 @@ export function getUserNotify(id, setNotifyList){
 }
 
 // Add Chat 
-export function addUserChat(id, userFriend){
-    const chatRef = ref(database, `chat/${id}/${userFriend.id}`)
+export function addUserChat(user, userFriend){
+    const time = new Date().getTime()
+    const chatRef = ref(database, `chat/${user.id}/${userFriend.id}`)
     set(chatRef,{
         nome:userFriend.nome,
-        id:userFriend.id
+        id:userFriend.id,
+        time:time
     })
     if(userFriend.foto != null){
         update(chatRef,{
             foto:userFriend.foto
+        })
+    }
+    const chatRef2 = ref(database, `chat/${userFriend.id}/${user.id}`)
+    set(chatRef2,{
+        nome:user.nome,
+        id:user.id,
+        time:time
+    })
+    if(user.foto != null){
+        update(chatRef2,{
+            foto:user.foto
         })
     }
 }
@@ -451,6 +464,64 @@ export function getChatList(id, setChatList){
                 chatList.push(chat.val())
             })
         }
-        setChatList(chatList)
+        setChatList(chatList.sort((a, b)=> {
+            return b.time - a.time
+        }))
+    })
+}
+
+// Update Chat Time
+export function updateChatTime(id, idUserFriend){
+    const time = new Date().getTime()
+    
+    const chatRef = ref(database, `chat/${id}/${idUserFriend}`)
+    const chatRef2 = ref(database, `chat/${idUserFriend}/${id}`)
+    
+    update(chatRef,{time:time})
+    update(chatRef2,{time:time})
+
+}
+
+// Add Mensage
+export function addMensage(user, idUserFriend, mensage){
+    
+    const hoje = new Date()
+    const hora = hoje.getHours().toString()
+    const minutos = hoje.getMinutes().toString()
+    
+    let minutosEdit
+    let horaEdit
+
+    if(hora.length<=1){ horaEdit = `0${hora}` } else{horaEdit = hora}
+    if(minutos.length<=1){ minutosEdit = `0${minutos}` } else{ minutosEdit = minutos}
+    
+    const horaMinuto =  horaEdit + ":" + minutosEdit
+
+    const newMensageKey = push(ref(database, `mensagens/${user.id}/${idUserFriend}`)).key
+    
+    set(ref(database, `mensagens/${user.id}/${idUserFriend}/${newMensageKey}`),{
+        nome:user.nome,
+        id:user.id,
+        mensagem:mensage,
+        time:horaMinuto
+    })    
+    set(ref(database, `mensagens/${idUserFriend}/${user.id}/${newMensageKey}`),{
+        nome:user.nome,
+        id:user.id,
+        mensagem:mensage,
+        time:horaMinuto
+    })
+}
+
+// Get Mensage List
+export function getMensageList(id, idUserFriend, setMensageList){
+    onValue(ref(database, `mensagens/${id}/${idUserFriend}`), snapshot => {
+        let mensageList = []
+        if(snapshot.exists()){
+            snapshot.forEach(mensage => {
+                mensageList.push(mensage.val())
+            })
+        }
+        setMensageList(mensageList)
     })
 }
