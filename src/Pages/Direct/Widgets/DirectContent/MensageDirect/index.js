@@ -3,11 +3,12 @@ import './style.css'
 
 export default function MensageDirect(props){
 
+    /*
     const [active, setActive] = useState('open-midia-container')
 
     function handlerImage(){
         setActive("open-midia-container active")
-    }
+    }*/
     return(
         <p className={props.smsClass}>
             {props.mensage}
