@@ -427,3 +427,30 @@ export function getUserNotify(id, setNotifyList){
         setNotifyList(notifyList)
     })
 }
+
+// Add Chat 
+export function addUserChat(id, userFriend){
+    const chatRef = ref(database, `chat/${id}/${userFriend.id}`)
+    set(chatRef,{
+        nome:userFriend.nome,
+        id:userFriend.id
+    })
+    if(userFriend.foto != null){
+        update(chatRef,{
+            foto:userFriend.foto
+        })
+    }
+}
+
+// Get Chat List
+export function getChatList(id, setChatList){
+    onValue(ref(database,`chat/${id}`), snapshot => {
+        let chatList = []
+        if(snapshot.exists){
+            snapshot.forEach(chat => {
+                chatList.push(chat.val())
+            })
+        }
+        setChatList(chatList)
+    })
+}
