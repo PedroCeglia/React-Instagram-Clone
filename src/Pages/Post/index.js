@@ -115,13 +115,21 @@ export default function Post(){
         }
     },[userAuth])
 
+    // Get UserAuth by Database
+    const [user, setUser] = useState()
+    useEffect(()=>{
+        if(userAuth != null){
+            getUserById(userAuth.uid, setUser)
+        }
+    },[userAuth])
+
     // Get Description
     const [descricao, setDescricao] = useState('')
 
     // Add Post And Feed In Firebase
     function addPostFeedInDatabase(){
-        if(userAuth != null && postUrl != null && descricao.length > 5 && followList != null){
-            addPostAndFeedDatabase(userAuth.uid, postUrl, descricao, followList)
+        if(user != null && postUrl != null && descricao.length > 5 && followList != null){
+            addPostAndFeedDatabase(user.uid, postUrl, descricao, followList, user)
             const postContent = document.querySelector('.post-content')
             const editAlertContent = document.querySelector('.edit-post-alert-content')
             const editPostContainer = document.querySelector('.edit-post-container')
