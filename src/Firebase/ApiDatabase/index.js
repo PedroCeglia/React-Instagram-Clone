@@ -530,4 +530,4 @@ export function getMensageList(id, idUserFriend, setMensageList){
         }
         setMensageList(mensageList)
     })
-}
+} 

@@ -7,6 +7,9 @@ import { v4 as uuidv4 } from 'uuid';
 // Import ApiAuth 
 import { setUserFoto } from '../ApiAuth';
 
+// Import DatabaseApi
+import {addMensage} from '../ApiDatabase'
+
 // Set User Perfil Photo
 export function setUserPerfilFoto(image, id, setSrcImage){
     // Storage User Perfil Foto Ref
@@ -56,3 +59,14 @@ export function deletePostInStorage(id, uidPost){
     postRef.delete()
 }
 
+// Add Mensage In Storage
+export function addMensageInStorage(user, idUserFriend, file, type){
+    const uidMensage = uuidv4()
+    const uploadTask = storage.ref().child(`imagens/mensagens/${user.id}/${uidMensage}`).put(file)
+    uploadTask.on(storageEvent, ()=>{},()=>{},()=>{
+        uploadTask.snapshot.ref.getDownloadURL().then(url =>{
+            addMensage(user, idUserFriend, url, type)
+        })
+    })
+
+}
