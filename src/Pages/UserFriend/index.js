@@ -13,6 +13,7 @@ import { getUserLog } from '../../Firebase/ApiAuth'
 // Import Widgets
 import Header from '../../Widgets/Header'
 import FollowList from '../../Widgets/FollowList'
+import ItemPostPage from '../../Widgets/ItemPostPage'
 
 export default function UserFriend(){
   
@@ -138,7 +139,7 @@ export default function UserFriend(){
                 {
                     userPosts.map( (post, key) =>{
                         return(
-                            <img src={post.foto} alt='Post' key={key}/>
+                          <ItemPostPage idPost={post.idPostagem} pathname={location.pathname} midiaPost={post.foto} idUser={post.idUsuario} key={key}/>
                         )
                     })
                 }
