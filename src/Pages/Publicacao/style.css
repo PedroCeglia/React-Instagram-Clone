@@ -42,7 +42,8 @@
     box-shadow: 0 0 20px rgba(0,0,0,0.8);
 }
 .publicacao-container .publicacao-content img.post{
-    width: calc( 100% - 20px);
+    width: 100%;
+    max-width: 40vw;
     height: calc(100% - 20px);
 
     border-radius: 5px;
@@ -93,6 +94,7 @@
     border-top: 1px solid rgba(0,0,0,0.2);
     border-bottom: 1px solid rgba(0,0,0,0.2);
 
+    overflow-x: hidden;
     overflow-y: auto;
 
     margin: 20px 0;
