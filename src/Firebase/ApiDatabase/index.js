@@ -56,7 +56,7 @@ export function getUserPosts(id, setUserPostList){
             snapshot.forEach( post =>{
                 listPost.push(post.val())
             })
-            setUserPostList(listPost)
+            setUserPostList(listPost.reverse())
         }
     })
 }
@@ -319,13 +319,16 @@ export function getUserById(userId, setUser){
 }  
 
 // ADD Post And Feed
-export function addPostAndFeedDatabase(id, url, descricao, followList){
+export function addPostAndFeedDatabase(id, url, descricao, followList, user){
     const postKey = push(ref(database, `postagens/${id}`)).key
     set(ref(database,`postagens/${id}/${postKey}`),{
         idUsuario:id,
         idPostagem:postKey,
         foto:url,
         descricao:descricao
+    })
+    update(ref(database,`usuarios/${id}`),{
+        publicacoes: user.publicacoes + 1
     })
     followList.forEach(user =>{
         if(user.foto != null){
@@ -482,8 +485,8 @@ export function updateChatTime(id, idUserFriend){
 
 }
 
-// Add Mensage
-export function addMensage(user, idUserFriend, mensage){
+// Add Mensage 
+export function addMensage(user, idUserFriend, mensage, type){
     
     const hoje = new Date()
     const hora = hoje.getHours().toString()
@@ -498,17 +501,20 @@ export function addMensage(user, idUserFriend, mensage){
     const horaMinuto =  horaEdit + ":" + minutosEdit
 
     const newMensageKey = push(ref(database, `mensagens/${user.id}/${idUserFriend}`)).key
+
     
     set(ref(database, `mensagens/${user.id}/${idUserFriend}/${newMensageKey}`),{
         nome:user.nome,
         id:user.id,
         mensagem:mensage,
+        type:type,
         time:horaMinuto
     })    
     set(ref(database, `mensagens/${idUserFriend}/${user.id}/${newMensageKey}`),{
         nome:user.nome,
         id:user.id,
         mensagem:mensage,
+        type:type,
         time:horaMinuto
     })
 }
