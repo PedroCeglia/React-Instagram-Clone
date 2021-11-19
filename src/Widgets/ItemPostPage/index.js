@@ -46,7 +46,7 @@ export default function ItemPostPage(props){
                 pathname:props.pathname
             })
         }
-    }
+    } 
      
     return(
         <div className='item-post-page-container' onClick={openPublicacao}>
