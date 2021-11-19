@@ -52,9 +52,9 @@ export default function ItemPostPage(props){
         <div className='item-post-page-container' onClick={openPublicacao}>
             <img className='midia' src={srcImageMidia} alt='Midia' />
             <div className='item-post-page-container-dates'>
-                <img src='../assets/like.png' alt='Like Icon'/> 
+                <img src='../assets/like-red.png' alt='Like Icon'/> 
                 <span>{likesList.length}</span>
-                <img src='../assets/chat.png' alt='Chat Icon'/> 
+                <img src='../assets/comment.png' alt='Chat Icon'/> 
                 <span>{commentList.length}</span>
             </div>
         </div>
