@@ -122,6 +122,22 @@
     
     border-radius: 20px;
 }
+.direct-container .direct-content .has-chat .direct-content-content .direct-keyboard input.file{
+    display: none;
+}
+.direct-container .direct-content .has-chat .direct-content-content .direct-keyboard label{
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.direct-container .direct-content .has-chat .direct-content-content .direct-keyboard label img{
+    width: 20px;
+    height: 20px;
+
+    object-fit: cover;
+}
+
 .direct-container .direct-content .has-chat .direct-content-content .direct-keyboard input{
     outline: none;
     border: none;
