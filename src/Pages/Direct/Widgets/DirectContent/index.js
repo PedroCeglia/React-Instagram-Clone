@@ -1,8 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import './style.css'
 
 // Import DatabaseApi
 import { addMensage, addUserChat, getMensageList, getUserById, updateChatTime } from '../../../../Firebase/ApiDatabase'
+
+// Import StorageApi
+import { addMensageInStorage } from '../../../../Firebase/ApiStorage'
 
 // Import Widgets 
 import MensageDirect from './MensageDirect'
@@ -55,11 +58,37 @@ export default function DirectContent(props){
             } else{
                 updateChatTime(user.id, userFriend.id)
             }
-            addMensage(user, userFriend.id, inputMensage)
+            addMensage(user, userFriend.id, inputMensage, 'mensage')
 
             setInputMensage('')
         }
     }
+
+    // Send a New File
+    function setMidia(src){
+        if(src.target.files[0] != null ){
+            let tipoFile = src.target.files[0].type.split('/')
+            switch(tipoFile[0]){
+                case 'image':
+                    addMensageInStorage(user, userFriend.id, src.target.files[0], 'foto')
+                    break;
+                case 'video':
+                    addMensageInStorage(user, userFriend.id, src.target.files[0], 'video')
+                    break;    
+            }            
+        }
+    }
+
+    // Scroll Config
+    const messageEl = useRef(null);
+    useEffect(() => {
+        if (messageEl) {
+        messageEl.current.addEventListener('DOMNodeInserted', event => {
+            const { currentTarget: target } = event;
+            target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+        });
+        }
+    }, [])
 
     return(
         <div className='direct-content'>
@@ -73,7 +102,7 @@ export default function DirectContent(props){
                     <span>{userFriendName}</span>
                 </div>
                 <div className='direct-content-content'>
-                    <div className='direct-mensage-list'>
+                    <div className='direct-mensage-list' ref={messageEl}>
                         {
                             mensageList.map((mensage, key)=>{
 
@@ -84,6 +113,7 @@ export default function DirectContent(props){
                                         smsClass={classMensage}
                                         mensage = {mensage.mensagem}
                                         smsHour = {mensage.time}
+                                        type={mensage.type}
                                         key = {key}
                                     />
                                 )
@@ -91,6 +121,10 @@ export default function DirectContent(props){
                         }
                     </div>
                     <div className='direct-keyboard'>
+                        <label htmlFor='sentImagesOrVideosByMensage'><img title='Send File' src='../assets/clip.png' alt='Clip Icon'/></label>
+                        <input className='file' type='file' id='sentImagesOrVideosByMensage'
+                            onChange={e => setMidia(e)}
+                        />
                         <input type='text' placeholder='Mensagem...'
                                 value={inputMensage} onChange={text=>{setInputMensage(text.target.value)}}
                         />
