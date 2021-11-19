@@ -21,7 +21,7 @@
 
     object-fit: fill;
     
-    z-index: 9;
+    z-index: 5;
 }
 
 .item-post-page-container .item-post-page-container-dates{
@@ -40,7 +40,7 @@
     z-index: 1;
 }
 .item-post-page-container:hover .item-post-page-container-dates{
-    z-index: 10;
+    z-index: 7;
 }
 .item-post-page-container .item-post-page-container-dates img{
     width: 40px;
@@ -51,3 +51,4 @@
     font-size: 1.1em;
     margin: 0 10px 0 20px;
 }
+ 
