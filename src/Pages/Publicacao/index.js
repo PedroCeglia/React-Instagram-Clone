@@ -58,7 +58,6 @@ export default function Publicacao(){
     // Get User Auth
     const userAuth = getUserLog()
 
-
     // Get User
     const [user, setUser] = useState()
     useEffect(()=>{
@@ -83,6 +82,17 @@ export default function Publicacao(){
         }
     },[user])
 
+    // Get Description
+    const [descricaoList, setDescricaoList] = useState([])
+    useEffect(()=>{
+        if(post != null && user != null){
+            let listDesc = []
+            if(post.descricao != null){
+                listDesc.push(post.descricao)
+            }
+            setDescricaoList(listDesc)
+        }
+    },[post, user])
 
     // Get Post Comment
     const [commentsList, setCommentsList] = useState([])
@@ -99,12 +109,12 @@ export default function Publicacao(){
     const [likesList, setLikesList] = useState([])
     const [isLike, setIsLike] = useState('')
     useEffect(()=>{
-        if(stateLocation != null){
-            if(stateLocation.idPost != null && stateLocation.idUser != null){
-                getLikesPost(stateLocation.idPost, stateLocation.idUser, setIsLike, setLikesList)
+        if(stateLocation != null && userAuth != null){
+            if(stateLocation.idPost != null){
+                getLikesPost(stateLocation.idPost, userAuth.uid, setIsLike, setLikesList)
             }
         }
-    },[stateLocation])
+    },[stateLocation, userAuth])
 
     // Config Post Like In UI
     const [srcLikeButton, setSrcLikeButton] = useState('../assets/like.png')
@@ -148,9 +158,16 @@ export default function Publicacao(){
 
     // Back to Last Page
     function backTheLastPage(){
-        if(stateLocation != null){
+        if(stateLocation != null && user != null){
             if(stateLocation.pathname != null){
-                history.push(stateLocation.pathname)
+                if(stateLocation.pathname === '/home/userfriend'){
+                    history.push(stateLocation.pathname, {
+                        userId:user.id
+                    })
+                }else{
+                    history.push(stateLocation.pathname)
+                }
+                
             }            
         }
     }
@@ -166,6 +183,18 @@ export default function Publicacao(){
                         <span>{userName}</span>
                     </div>
                     <div className='publicacao-comment-area'>
+                        {
+                            descricaoList.map((description, key) => {
+                                return(
+                                    <ItemComment
+                                    pathname={pathName}
+                                    user={{id:user.id}}    
+                                    comment={description}
+                                    key={key}
+                                />
+                                )
+                            })
+                        }
                         {commentsList.map((comment, key) =>{
                             return(
                                 <ItemComment
