@@ -95,18 +95,22 @@ export default function ItemNotify(props) {
         } else{
             return(
                 <div className='item-notify-container' onClick={openUserPage}>
-                    <img src={userImage} className='perfil' alt='User Action'/>
-                    <span className='user-name'>{userName}</span>
-                    <span className='user-action'>{notifyMensage}</span>
+                    <div>
+                        <img src={userImage} className='perfil' alt='User Action'/>
+                        <span className='user-name'>{userName}</span>
+                        <span className='user-action'>{notifyMensage}</span>                        
+                    </div>
                 </div>
             )    
         }
     }else{
         return(
             <div className='item-notify-container' onClick={openUserPage}>
-                <img src={userImage} className='perfil' alt='User Action'/>
-                <span className='user-name'>{userName}</span>
-                <span className='user-action'>{notifyMensage}</span>
+                <div>
+                    <img src={userImage} className='perfil' alt='User Action'/>
+                    <span className='user-name'>{userName}</span>
+                    <span className='user-action'>{notifyMensage}</span>                    
+                </div>
             </div>
         )
     }
