@@ -6,7 +6,7 @@ import { useHistory, useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 
 // Import AuthApi
-import { VerifyListenerUserIsLog, getUserLog} from '../../Firebase/ApiAuth'
+import { VerifyListenerUserIsLog, getUserLog, logOutUser} from '../../Firebase/ApiAuth'
 
 // Import DatabaseApi
 import { getUserLogDatabase, getUserPosts } from '../../Firebase/ApiDatabase'
@@ -87,6 +87,7 @@ export default function Perfil(){
                         <div>
                             <span className='user-name'>{userName}</span>
                             <Link to='/home/perfil/editar_perfil'><button>Editar Perfil</button></Link>
+                            <button className='exit' onClick={logOutUser}><img src='../assets/exit.png' alt='Exit Icon'/></button>
                         </div>
                         <div className='perfil-number'>
                             <span className='publicacoes'><strong>{publicacoes}</strong> Publicações</span>
