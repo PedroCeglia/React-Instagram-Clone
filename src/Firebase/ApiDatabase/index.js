@@ -98,7 +98,7 @@ export function getUserFeed(id, setFeedList){
             snapshot.forEach(post => {
                 postList.push(post.val())
             })
-            setFeedList(postList)
+            setFeedList(postList.reverse())
         }
     })
 }
