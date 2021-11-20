@@ -28,7 +28,7 @@ div.sms-you, div.sms-friend{
 .sms-you video, .sms-friend video{
     display: block;
     max-width: 40vw;
-    max-height: 40vh;
+    height: 40vh;
     cursor: pointer;
 }
 .sms-you source, .sms-friend source{
