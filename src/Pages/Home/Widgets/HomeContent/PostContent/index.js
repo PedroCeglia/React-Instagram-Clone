@@ -23,6 +23,7 @@ export default function PostContent(props){
                     return(
                         <ItemPost
                             key={key}
+                            idKey={key}
                             post={post}
                             userauth={props.userauth}
                         />
