@@ -1,13 +1,38 @@
 import React,{useEffect, useState} from 'react'
 import './style.css'
 
+// Import React Router
+import {useHistory} from 'react-router-dom'
+
 // Import DatabaseApi
-import { getLikesPost, getCommentsPost, removeLikeInPost, addLikeInPost, addCommentInPost } from '../../../../../../Firebase/ApiDatabase'
+import { getLikesPost, getCommentsPost, removeLikeInPost, addLikeInPost, addCommentInPost, getUserById } from '../../../../../../Firebase/ApiDatabase'
 
 // Import Widgets
 import FollowList from '../../../../../../Widgets/FollowList'
 
 export default function ItemPost(props){
+ 
+    // Get Key
+    const [key, setKey] = useState("id")
+    useEffect(()=>{
+        let x = 0
+        while(x < props.idKey){
+            setKey(text => text + "id")
+            x++             
+        }
+    },[props.idKey])
+
+    const classWithKeyLike = `.post-item.${key} .post-like`
+    const classWithKeyComment = `.post-item.${key} .post-comentarios`
+    const classWithKey = `post-item ${key}`
+
+    // Get User By Id
+    const [user, setUser] = useState()
+    useEffect(()=>{
+        if(props.post != null){
+            getUserById(props.post.idUsuario, setUser)
+        }
+    },[props.post])
 
     // Get User Post Dates And Midia Date
     const [userName, setUserName] = useState('user_name')
@@ -15,14 +40,14 @@ export default function ItemPost(props){
     const [userFoto, setUserFoto] = useState('assets/perfil.png')
     const [postFoto, setPostFoto] = useState('assets/perfil.png')
     useEffect(()=>{
-        if(props.post != null){
-            if(props.post.fotoUsuario != null){
-                setUserFoto(props.post.fotoUsuario)
+        if(props.post != null && user != null){
+            if(user.foto != null){
+                setUserFoto(user.foto)
             }
             if(props.post.descricao != null){
                 setPostDescription(props.post.descricao)
             }
-            setUserName(props.post.nomeUsuario)
+            setUserName(user.nome)
             setPostFoto(props.post.fotoPostagem)
         } else{
             setUserName('user_name')
@@ -30,7 +55,7 @@ export default function ItemPost(props){
             setPostFoto('assets/perfil.png')
             setPostDescription('')
         }
-    },[props.post])
+    },[props.post, user])
 
     // Get Likes Post
     const [listLike, setListLike] = useState([])
@@ -65,7 +90,7 @@ export default function ItemPost(props){
 
     // Close Likes List
     function toggleLikesList(){
-        let likeList = document.querySelector('.post-like .container-follow-list')
+        let likeList = document.querySelector(`.post-item.${key} .post-like .container-follow-list`)
         likeList.classList.toggle('none')
     }
 
@@ -80,7 +105,7 @@ export default function ItemPost(props){
     // Add Comments
     const [inputComment, setInputComment] = useState('')
     useEffect(()=>{
-        let btnSend = document.querySelector('.post-comentar span')
+        let btnSend = document.querySelector(`.post-item.${key} .post-comentar span`)
         if(inputComment.length > 3){    
             btnSend.classList.add('active')
         } else{
@@ -96,17 +121,26 @@ export default function ItemPost(props){
 
     // Toggle Comment List
     function toggleCommentList(){
-        let commentList = document.querySelector('.post-comentarios .container-follow-list')
+        let commentList = document.querySelector(`.post-item.${key} .post-comentarios .container-follow-list`)
         commentList.classList.toggle('none')
     }
 
+    // Change The Page
+    const history = useHistory()
+    function openUserFriendPage(){
+        if(user != null){
+            history.push('home/userfriend',{
+                userId:user.id
+            })
+        }
+    }
 
     return(
-        <div className='post-item'>
+        <div className={classWithKey}>
             <div className='post-header'>
-                <div className='user-date-post'>
-                <img className='perfil-foto-post' src={userFoto} alt='User Perfil'/>
-                <span>{userName}</span>
+                <div className='user-date-post' onClick={openUserFriendPage}>
+                    <img className='perfil-foto-post' src={userFoto} alt='User Perfil'/>
+                    <span>{userName}</span>
                 </div>
                 <img className='menu-post' src='assets/menu.png' alt='Menu Icon'/>
             </div>
@@ -127,7 +161,7 @@ export default function ItemPost(props){
                     userauth = {props.userauth}
                     followtype = 'likes'
                     likeslist = {listLike}
-                    classtoggle = '.post-like'
+                    classtoggle = {classWithKeyLike}
                 />
             </div>
             <div className='post-descricao'>   
@@ -139,7 +173,7 @@ export default function ItemPost(props){
                     userauth = {props.userauth}
                     followtype = 'comment'
                     commentlist = {commentList}
-                    classtoggle = '.post-comentarios'
+                    classtoggle = {classWithKeyComment}
                 />
             </div>
             <div className='post-comentar'>
