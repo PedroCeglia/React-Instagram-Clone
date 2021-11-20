@@ -28,6 +28,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+
 }
 .post-icons .post-header.user-date-post span{
     font-weight: bold;
@@ -51,8 +53,8 @@
 /* Media Post Container */
 .post-item .post-midia,
 .post-item .post-midia img{
-    width: 100%;
-    height:60vh;
+    width: 50vw;
+    height:50vw;
 }
 
 /* Icons Post */
