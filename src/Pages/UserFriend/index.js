@@ -8,7 +8,7 @@ import { useLocation, useHistory } from 'react-router'
 import { getUserById, getUserPosts, verifyIfIsFollow, addFollow, removeFollow} from '../../Firebase/ApiDatabase'
 
 // Import AuthApi
-import { getUserLog } from '../../Firebase/ApiAuth'
+import { getUserLog, VerifyListenerUserIsLog } from '../../Firebase/ApiAuth'
 
 // Import Widgets
 import Header from '../../Widgets/Header'
@@ -16,16 +16,31 @@ import FollowList from '../../Widgets/FollowList'
 import ItemPostPage from '../../Widgets/ItemPostPage'
 
 export default function UserFriend(){
+
+  // Verfifica se o Usuario esta logado
+  // Listener IsLog
+  const isLog = VerifyListenerUserIsLog()
+
+  // Change To Intro Page
+  const history = useHistory()
+  useEffect(()=>{
+      if(isLog === "false"){
+          history.push('/')
+      }
+  },[isLog, history])
+
   
   // Get Location State And Get UserDates
   const location = useLocation()
-  const userId = location.state.userId
+  const locationState = location.state
   const [user, setUser] = useState('')
   useEffect(()=>{
-    if(userId != null){
-      getUserById(userId, setUser)
+    if(locationState != null){
+      if(locationState.userId != null){
+        getUserById(locationState.userId, setUser)
+      }
     }
-  },[userId])
+  },[locationState])
 
   // Config User Dates
   const [userName, setUserName] = useState('')
@@ -76,7 +91,6 @@ export default function UserFriend(){
   },[userAuthLog])
 
   // Verify if UserFriend And UserAuthLog Is the same
-  const history = useHistory()
   useEffect(()=>{
     if(userAuthLog != null && user != null){
       if(userAuthLog.uid === user.id){
